@@ -1,7 +1,13 @@
 package omok.model
 
+interface GridElement {
+    val value: Int
+}
+
 @JvmInline
-value class GridElement(private val value: Int) {
+value class DefaultGridElement(
+    override val value: Int,
+) : GridElement {
     init {
         require(value in MIN_VALUE..MAX_VALUE)
     }
