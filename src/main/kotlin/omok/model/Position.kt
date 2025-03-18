@@ -5,7 +5,7 @@ interface Position {
     val column: GridElement
 }
 
-class DefaultPosition(
+data class DefaultPosition(
     override val row: GridElement,
     override val column: GridElement,
 ) : Position {

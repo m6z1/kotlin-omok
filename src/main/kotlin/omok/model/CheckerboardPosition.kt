@@ -3,9 +3,13 @@ package omok.model
 interface CheckerboardPosition {
     val position: Position
     val state: CheckerboardPositionState
+
+    fun put(stone: Stone): CheckerboardPosition
 }
 
-class DefaultCheckerboardPosition(
+data class DefaultCheckerboardPosition(
     override val position: Position,
     override val state: CheckerboardPositionState = CheckerboardPositionState.EMPTY,
-) : CheckerboardPosition
+) : CheckerboardPosition {
+    override fun put(stone: Stone): CheckerboardPosition = copy(state = state.put(stone))
+}
