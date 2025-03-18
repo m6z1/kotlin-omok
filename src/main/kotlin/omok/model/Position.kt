@@ -8,4 +8,11 @@ interface Position {
 class DefaultPosition(
     override val row: GridElement,
     override val column: GridElement,
-) : Position
+) : Position {
+    companion object {
+        operator fun invoke(
+            row: Int,
+            column: Int,
+        ) = DefaultPosition(DefaultGridElement(row), DefaultGridElement(column))
+    }
+}
