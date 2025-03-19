@@ -76,7 +76,7 @@ class DefaultBoard(
             return DefaultBoard(defaultPositions, sideLength)
         }
 
-        operator fun invoke(sideLength: Int): DefaultBoard {
+        operator fun invoke(sideLength: Int = 15): DefaultBoard {
             val defaultPositions: Set<BoardPosition> =
                 (0 until sideLength)
                     .flatMap { row: Int ->
