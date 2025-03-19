@@ -9,7 +9,18 @@ interface Board {
         stone: Stone,
     )
 
+    fun put(
+        row: Int,
+        column: Int,
+        stone: Stone,
+    )
+
     fun stateOf(position: Position): BoardPositionState
+
+    fun stateOf(
+        row: Int,
+        column: Int,
+    ): BoardPositionState
 }
 
 class DefaultBoard(
@@ -27,11 +38,24 @@ class DefaultBoard(
     ) {
         val targetPosition: BoardPosition = boardPosition(position)
 
-        _positions -= targetPosition
-        _positions += targetPosition.put(stone)
+        _positions.remove(targetPosition)
+        _positions.add(targetPosition.put(stone))
+    }
+
+    override fun put(
+        row: Int,
+        column: Int,
+        stone: Stone,
+    ) {
+        put(DefaultPosition(row, column), stone)
     }
 
     override fun stateOf(position: Position): BoardPositionState = boardPosition(position).state
+
+    override fun stateOf(
+        row: Int,
+        column: Int,
+    ): BoardPositionState = stateOf(DefaultPosition(row, column))
 
     private fun boardPosition(position: Position): BoardPosition =
         positions
@@ -49,7 +73,7 @@ class DefaultBoard(
                             DefaultBoardPosition(position)
                         }
                     }.toSet()
-            return DefaultBoard(defaultPositions)
+            return DefaultBoard(defaultPositions, sideLength)
         }
 
         operator fun invoke(sideLength: Int): DefaultBoard {
@@ -61,7 +85,7 @@ class DefaultBoard(
                             DefaultBoardPosition(position)
                         }
                     }.toSet()
-            return DefaultBoard(defaultPositions)
+            return DefaultBoard(defaultPositions, DefaultGridElement(sideLength))
         }
     }
 }
