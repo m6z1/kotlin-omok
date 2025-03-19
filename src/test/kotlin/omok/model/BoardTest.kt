@@ -5,9 +5,13 @@ import org.junit.jupiter.api.Test
 
 class BoardTest {
     @Test
-    fun `오목판은 225개의 중복되지 않는 위치를 가진다`() {
-        val board = DefaultBoard()
-        assertThat(board.size).isEqualTo(225)
+    fun `원하는 한 변의 길이를 받아 정사각형의 보드판을 만들 수 있다`() {
+        // given:
+        // when:
+        val board = DefaultBoard(10)
+
+        // then:
+        assertThat(board.positions.size).isEqualTo(100)
     }
 
     @Test
@@ -26,8 +30,9 @@ class BoardTest {
     @Test
     fun `원하는 위치에 돌을 둘 수 있다`() {
         // given:
-        val board = DefaultBoard()
         val position = DefaultPosition(1, 2)
+        val boardPosition = DefaultBoardPosition(position)
+        val board = DefaultBoard(boardPosition)
 
         // when:
         board.put(position, Stone.WHITE)

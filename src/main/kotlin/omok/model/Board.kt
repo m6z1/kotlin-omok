@@ -2,7 +2,7 @@ package omok.model
 
 interface Board {
     val positions: Set<BoardPosition>
-    val size: Int
+    val sideLength: GridElement
 
     fun put(
         position: Position,
@@ -14,12 +14,10 @@ interface Board {
 
 class DefaultBoard(
     positions: Set<BoardPosition>,
+    override val sideLength: GridElement = DefaultGridElement(15),
 ) : Board {
     private val _positions: MutableSet<BoardPosition> = positions.toMutableSet()
     override val positions: Set<BoardPosition> get() = _positions
-
-    override val size: Int
-        get() = positions.size
 
     constructor(position: BoardPosition) : this(setOf(position))
 
@@ -42,11 +40,23 @@ class DefaultBoard(
             } ?: throw IllegalArgumentException("$position 는 존재하지 않는 위치 입니다.")
 
     companion object {
-        operator fun invoke(): DefaultBoard {
+        operator fun invoke(sideLength: GridElement): DefaultBoard {
             val defaultPositions: Set<BoardPosition> =
-                (0..14)
+                (0 until sideLength.value)
                     .flatMap { row: Int ->
-                        (0..14).map { column: Int ->
+                        (0 until sideLength.value).map { column: Int ->
+                            val position = DefaultPosition(row, column)
+                            DefaultBoardPosition(position)
+                        }
+                    }.toSet()
+            return DefaultBoard(defaultPositions)
+        }
+
+        operator fun invoke(sideLength: Int): DefaultBoard {
+            val defaultPositions: Set<BoardPosition> =
+                (0 until sideLength)
+                    .flatMap { row: Int ->
+                        (0 until sideLength).map { column: Int ->
                             val position = DefaultPosition(row, column)
                             DefaultBoardPosition(position)
                         }
