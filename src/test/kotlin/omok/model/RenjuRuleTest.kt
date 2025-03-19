@@ -3,7 +3,7 @@ package omok.model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class DefaultRenjuRuleTest {
+class RenjuRuleTest {
     @Test
     fun `가로로 다섯 개의 연속된 돌을 먼저 만들면 승리 상태를 반환한다`() {
         // given:
