@@ -18,13 +18,13 @@ class BoardTest {
     fun `특정 위치에 있는 오목판의 상태를 알 수 있다`() {
         // given:
         val position = DefaultPosition(1, 2)
-        val board = DefaultBoard(DefaultBoardPosition(position, BoardPositionState.EXIST_WHITE_STONE))
+        val board = DefaultBoard(DefaultBoardPosition(position, BoardPositionState.Exist.White))
 
         // when:
         val actual: BoardPositionState = board.stateOf(position)
 
         // then:
-        assertThat(actual).isEqualTo(BoardPositionState.EXIST_WHITE_STONE)
+        assertThat(actual).isEqualTo(BoardPositionState.Exist.White)
     }
 
     @Test
@@ -38,6 +38,6 @@ class BoardTest {
         board.put(position, Stone.WHITE)
 
         // then:
-        assertThat(board.stateOf(position)).isEqualTo(BoardPositionState.EXIST_WHITE_STONE)
+        assertThat(board.stateOf(position)).isEqualTo(BoardPositionState.Exist.White)
     }
 }

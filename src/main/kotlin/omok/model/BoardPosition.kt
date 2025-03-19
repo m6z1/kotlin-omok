@@ -9,7 +9,7 @@ interface BoardPosition {
 
 data class DefaultBoardPosition(
     override val position: Position,
-    override val state: BoardPositionState = BoardPositionState.EMPTY,
+    override val state: BoardPositionState = BoardPositionState.Empty,
 ) : BoardPosition {
     override fun put(stone: Stone): BoardPosition = copy(state = state.put(stone))
 }
