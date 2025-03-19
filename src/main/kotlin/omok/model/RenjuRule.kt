@@ -48,14 +48,16 @@ class DefaultRenjuRule(
     ): Int {
         var count = 0
         var currentRow = position.row.value + dx
-        var currentCol = position.column.value + dy
+        var currentColumn = position.column.value + dy
 
         while (true) {
-            val nextPosition = DefaultPosition(currentRow, currentCol)
+            if (currentColumn !in 0 until board.sideLength.value || currentRow !in 0 until board.sideLength.value) return count
+
+            val nextPosition = DefaultPosition(currentRow, currentColumn)
             if (board.stateOf(nextPosition) == state) {
                 count++
                 currentRow += dx
-                currentCol += dy
+                currentColumn += dy
             } else {
                 break
             }
