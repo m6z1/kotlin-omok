@@ -9,7 +9,7 @@ value class DefaultGridElement(
     override val value: Int,
 ) : GridElement {
     init {
-        require(value >= MIN_VALUE) { "그리드 요소는 ${MIN_VALUE}이상의 값만 가능합니다." }
+        require(value >= MIN_VALUE) { "그리드 요소는 ${MIN_VALUE} 이상의 값만 가능합니다. value : $value" }
     }
 
     companion object {
