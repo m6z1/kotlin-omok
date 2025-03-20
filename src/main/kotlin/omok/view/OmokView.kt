@@ -1,10 +1,10 @@
 package omok.view
 
-import omok.model.Board
-import omok.model.BoardPositionState
-import omok.model.DefaultPosition
-import omok.model.Position
 import omok.model.Stone
+import omok.model.board.Board
+import omok.model.board.BoardPositionState
+import omok.model.position.DefaultPosition
+import omok.model.position.Position
 
 class OmokView {
     fun start(board: Board) {

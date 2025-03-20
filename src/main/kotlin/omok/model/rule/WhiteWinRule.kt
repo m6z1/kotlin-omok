@@ -1,8 +1,6 @@
-package omok.model.omokRule
+package omok.model.rule
 
-import omok.domain.omokRule.OmokRule
-
-object WhiteWinRule : OmokRule(WHITE_STONE, BLACK_STONE) {
+object WhiteWinRule : Rule(WHITE_STONE, BLACK_STONE) {
     override fun validated(
         board: List<List<Int>>,
         position: Pair<Int, Int>,

@@ -1,8 +1,6 @@
 package omok.model.rule
 
-import omok.domain.omokRule.OmokRule
-
-object BlackWinRule : OmokRule() {
+object BlackWinRule : Rule() {
     override fun validated(
         board: List<List<Int>>,
         position: Pair<Int, Int>,

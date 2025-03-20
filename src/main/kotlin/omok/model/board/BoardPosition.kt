@@ -1,4 +1,7 @@
-package omok.model
+package omok.model.board
+
+import omok.model.Stone
+import omok.model.position.Position
 
 interface BoardPosition {
     val position: Position

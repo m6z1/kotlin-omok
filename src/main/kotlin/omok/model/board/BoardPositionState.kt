@@ -1,4 +1,6 @@
-package omok.model
+package omok.model.board
+
+import omok.model.Stone
 
 sealed interface BoardPositionState {
     data object Empty : BoardPositionState

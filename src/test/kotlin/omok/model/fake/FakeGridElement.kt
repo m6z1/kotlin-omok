@@ -1,6 +1,6 @@
 package omok.model.fake
 
-import omok.model.GridElement
+import omok.model.position.GridElement
 
 class FakeGridElement : GridElement {
     override val value: Int = 5

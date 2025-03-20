@@ -1,7 +1,7 @@
 package omok.model.fake
 
-import omok.model.GridElement
-import omok.model.Position
+import omok.model.position.GridElement
+import omok.model.position.Position
 
 class FakePosition : Position {
     override val row: GridElement = FakeGridElement()

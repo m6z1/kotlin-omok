@@ -1,5 +1,7 @@
 package omok.model
 
+import omok.model.board.BoardPositionState
+import omok.model.board.DefaultBoardPosition
 import omok.model.fake.FakePosition
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

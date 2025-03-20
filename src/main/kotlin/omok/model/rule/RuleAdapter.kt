@@ -1,4 +1,8 @@
-package omok.model
+package omok.model.rule
+
+import omok.model.board.Board
+import omok.model.board.BoardPositionState
+import omok.model.position.Position
 
 object RuleAdapter {
     fun adapt(board: Board): List<List<Int>> {

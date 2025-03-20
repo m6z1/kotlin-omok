@@ -1,6 +1,6 @@
-package omok.domain.omokRule
+package omok.model.rule
 
-object ThreeThreeRule : OmokRule() {
+object ThreeThreeRule : Rule() {
     override fun validated(
         board: List<List<Int>>,
         position: Pair<Int, Int>,

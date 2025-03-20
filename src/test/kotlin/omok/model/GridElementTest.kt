@@ -1,5 +1,6 @@
 package omok.model
 
+import omok.model.position.DefaultGridElement
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 

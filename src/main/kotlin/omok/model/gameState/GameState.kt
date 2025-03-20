@@ -1,8 +1,8 @@
-package omok.model.state
+package omok.model.gameState
 
-import omok.model.Board
-import omok.model.Position
 import omok.model.Stone
+import omok.model.board.Board
+import omok.model.position.Position
 
 interface GameState {
     val stone: Stone

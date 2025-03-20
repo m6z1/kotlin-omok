@@ -1,4 +1,4 @@
-package omok.model
+package omok.model.position
 
 interface Position {
     val row: GridElement

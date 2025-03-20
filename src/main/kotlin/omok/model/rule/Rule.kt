@@ -1,6 +1,6 @@
-package omok.domain.omokRule
+package omok.model.rule
 
-abstract class OmokRule(
+abstract class Rule(
     private val currentStone: Int = BLACK_STONE,
     val opponentStone: Int = WHITE_STONE,
 ) {

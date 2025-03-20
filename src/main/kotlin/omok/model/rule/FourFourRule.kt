@@ -1,8 +1,6 @@
 package omok.model.rule
 
-import omok.domain.omokRule.OmokRule
-
-object FourFourRule : OmokRule() {
+object FourFourRule : Rule() {
     override fun validated(
         board: List<List<Int>>,
         position: Pair<Int, Int>,
