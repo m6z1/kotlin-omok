@@ -33,8 +33,8 @@ class DefaultBoard(
     positions: Set<BoardPosition>,
     override val sideLength: GridElement = DefaultGridElement(15),
 ) : Board {
-    private val _positions: MutableSet<BoardPosition> = positions.toMutableSet()
-    override val positions: Set<BoardPosition> get() = _positions
+    override var positions: Set<BoardPosition> = positions.toSet()
+        private set
 
     constructor(position: BoardPosition) : this(setOf(position))
 
@@ -43,9 +43,8 @@ class DefaultBoard(
         stone: Stone,
     ) {
         val targetPosition: BoardPosition = boardPosition(position)
-
-        _positions.remove(targetPosition)
-        _positions.add(targetPosition.put(stone))
+        positions -= targetPosition
+        positions += targetPosition.put(stone)
     }
 
     override fun put(
@@ -71,27 +70,22 @@ class DefaultBoard(
 
     companion object {
         operator fun invoke(sideLength: GridElement): DefaultBoard {
-            val defaultPositions: Set<BoardPosition> =
-                (0 until sideLength.value)
-                    .flatMap { row: Int ->
-                        (0 until sideLength.value).map { column: Int ->
-                            val position = DefaultPosition(row, column)
-                            DefaultBoardPosition(position)
-                        }
-                    }.toSet()
+            val defaultPositions: Set<BoardPosition> = defaultPositions(sideLength.value)
             return DefaultBoard(defaultPositions, sideLength)
         }
 
         operator fun invoke(sideLength: Int = 15): DefaultBoard {
-            val defaultPositions: Set<BoardPosition> =
-                (0 until sideLength)
-                    .flatMap { row: Int ->
-                        (0 until sideLength).map { column: Int ->
-                            val position = DefaultPosition(row, column)
-                            DefaultBoardPosition(position)
-                        }
-                    }.toSet()
+            val defaultPositions: Set<BoardPosition> = defaultPositions(sideLength)
             return DefaultBoard(defaultPositions, DefaultGridElement(sideLength))
         }
+
+        private fun defaultPositions(size: Int): Set<BoardPosition> =
+            (0 until size)
+                .flatMap { row: Int ->
+                    (0 until size).map { column: Int ->
+                        val position = DefaultPosition(row, column)
+                        DefaultBoardPosition(position)
+                    }
+                }.toSet()
     }
 }
