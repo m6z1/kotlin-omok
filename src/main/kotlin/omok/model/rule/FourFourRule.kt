@@ -4,14 +4,14 @@ object FourFourRule : Rule() {
     override fun validated(
         board: List<List<Int>>,
         position: Pair<Int, Int>,
-    ): Boolean = countOpenThrees(board, position) >= 2
+    ): Boolean = countFour(board, position) >= 2
 
-    private fun countOpenThrees(
+    private fun countFour(
         board: List<List<Int>>,
         position: Pair<Int, Int>,
-    ): Int = directions.sumOf { direction -> checkOpenFour(board, position, direction) }
+    ): Int = directions.sumOf { direction -> checkFour(board, position, direction) }
 
-    private fun checkOpenFour(
+    private fun checkFour(
         board: List<List<Int>>,
         position: Pair<Int, Int>,
         direction: Pair<Int, Int>,
