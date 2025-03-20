@@ -15,10 +15,12 @@ class OmokView {
     fun position(
         stone: Stone,
         boundary: Int,
-        lastStonePosition: Position? = null,
+        lastPosition: Position? = null,
+        forbiddenPosition: Position? = null,
     ): Position {
+        if (forbiddenPosition != null) println("해당 위치는 금수입니다.")
         print("${stone.toUIModel()}의 차례입니다. ")
-        if (lastStonePosition != null) print("(마지막 돌의 위치: ${lastStonePosition.toUIModel(boundary)})")
+        if (lastPosition != null) print("(마지막 돌의 위치: ${lastPosition.toUIModel(boundary)})")
         print("\n위치를 입력하세요: ")
         return readln().trim().uppercase().toPosition(boundary)
     }
@@ -83,8 +85,8 @@ class OmokView {
         return range.joinToString(separator = "  ", prefix = "    ")
     }
 
-    fun show(stone: Stone) {
-        println("${stone.toUIModel()}돌이 이겼습니다.")
+    fun show(winner: Stone) {
+        println("${winner.toUIModel()}돌이 이겼습니다.")
     }
 
     private fun Stone.toUIModel(): String =
