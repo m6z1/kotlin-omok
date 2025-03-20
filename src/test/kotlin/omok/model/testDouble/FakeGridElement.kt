@@ -1,4 +1,4 @@
-package omok.model.fake
+package omok.model.testDouble
 
 import omok.model.position.GridElement
 
