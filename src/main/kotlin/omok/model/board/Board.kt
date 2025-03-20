@@ -44,7 +44,7 @@ class DefaultBoard(
     ) {
         val targetPosition: BoardPosition = boardPosition(position)
         positions -= targetPosition
-        positions += targetPosition.put(stone)
+        positions += targetPosition.withStone(stone)
     }
 
     override fun put(
