@@ -15,20 +15,29 @@ object BlackTurn : GameState.Playing {
         board: Board,
         position: Position,
     ): GameState {
-        val adaptedBoard = RuleAdapter.adapt(board)
-        val adaptedPosition = RuleAdapter.adapt(position)
+        val adaptedBoard: List<List<Int>> = RuleAdapter.adapt(board)
+        val adaptedPosition: Pair<Int, Int> = RuleAdapter.adapt(position)
         return when {
-            BlackWinRule.validated(adaptedBoard, adaptedPosition) -> {
-                board.put(position, stone)
-                GameState.Finish.BLACK_WIN
-            }
-
+            BlackWinRule.validated(adaptedBoard, adaptedPosition) -> blackWin(board, position)
             FourFourRule.validated(adaptedBoard, adaptedPosition) -> this
             ThreeThreeRule.validated(adaptedBoard, adaptedPosition) -> this
-            else -> {
-                board.put(position, stone)
-                WhiteTurn
-            }
+            else -> whiteTurn(board, position)
         }
+    }
+
+    private fun blackWin(
+        board: Board,
+        position: Position,
+    ): GameState.Finish {
+        board.put(position, stone)
+        return GameState.Finish.BLACK_WIN
+    }
+
+    private fun whiteTurn(
+        board: Board,
+        position: Position,
+    ): WhiteTurn {
+        board.put(position, stone)
+        return WhiteTurn
     }
 }
