@@ -29,7 +29,7 @@ class OmokView {
         val boardToList: List<List<BoardPositionState>> =
             List(board.sideLength.value) { column ->
                 List(board.sideLength.value) { row ->
-                    board.stateOf(row, column)
+                    board.stateAt(row, column)
                 }
             }
 

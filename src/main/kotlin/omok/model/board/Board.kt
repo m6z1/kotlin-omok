@@ -21,9 +21,9 @@ interface Board {
         stone: Stone,
     )
 
-    fun stateOf(position: Position): BoardPositionState
+    fun stateAt(position: Position): BoardPositionState
 
-    fun stateOf(
+    fun stateAt(
         row: Int,
         column: Int,
     ): BoardPositionState
@@ -55,12 +55,12 @@ class DefaultBoard(
         put(DefaultPosition(row, column), stone)
     }
 
-    override fun stateOf(position: Position): BoardPositionState = boardPosition(position).state
+    override fun stateAt(position: Position): BoardPositionState = boardPosition(position).state
 
-    override fun stateOf(
+    override fun stateAt(
         row: Int,
         column: Int,
-    ): BoardPositionState = stateOf(DefaultPosition(row, column))
+    ): BoardPositionState = stateAt(DefaultPosition(row, column))
 
     private fun boardPosition(position: Position): BoardPosition =
         positions

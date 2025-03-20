@@ -9,7 +9,7 @@ object RuleAdapter {
         val adapted =
             List(board.sideLength.value) { column ->
                 List(board.sideLength.value) { row ->
-                    val state = board.stateOf(row, column)
+                    val state = board.stateAt(row, column)
                     when (state) {
                         BoardPositionState.Empty -> 0
                         BoardPositionState.Exist.Black -> 1
