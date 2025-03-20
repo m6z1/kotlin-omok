@@ -11,7 +11,7 @@ class Omok(
     private val omokView: OmokView,
 ) {
     fun play() {
-        val board = Board()
+        val board = board()
         var currentTurn: GameState = BlackTurn
         var lastPosition: Position? = null
         var position: Position = position(currentTurn, board)
@@ -26,7 +26,7 @@ class Omok(
         omokView.show(currentTurn.stone)
     }
 
-    private fun Board(): Board {
+    private fun board(): Board {
         val board = DefaultBoard()
         omokView.start(board)
         return board
