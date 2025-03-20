@@ -23,7 +23,7 @@ class BoardPositionStateTest {
         val state = BoardPositionState.Exist.White
 
         // then:
-        assertThrows<IllegalStateException> { state.put(Stone.BLACK) }
+        assertThrows<IllegalStateException> { state.withStone(Stone.BLACK) }
     }
 
     @Test
@@ -32,7 +32,7 @@ class BoardPositionStateTest {
         val state = BoardPositionState.Empty
 
         // when:
-        val actual = state.put(Stone.BLACK)
+        val actual = state.withStone(Stone.BLACK)
 
         // then:
         assertThat(actual).isEqualTo(BoardPositionState.Exist.Black)
@@ -44,7 +44,7 @@ class BoardPositionStateTest {
         val state = BoardPositionState.Empty
 
         // when:
-        val actual = state.put(Stone.WHITE)
+        val actual = state.withStone(Stone.WHITE)
 
         // then:
         assertThat(actual).isEqualTo(BoardPositionState.Exist.White)
