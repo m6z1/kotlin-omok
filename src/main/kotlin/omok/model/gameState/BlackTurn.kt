@@ -1,11 +1,11 @@
 package omok.model.gameState
 
 import omok.model.Stone
+import omok.model.adapter.RuleAdapter
 import omok.model.board.Board
 import omok.model.position.Position
 import omok.model.rule.BlackWinRule
 import omok.model.rule.FourFourRule
-import omok.model.rule.RuleAdapter
 import omok.model.rule.ThreeThreeRule
 
 object BlackTurn : GameState.Playing {

@@ -1,4 +1,4 @@
-package omok.model.rule
+package omok.model.adapter
 
 import omok.model.board.Board
 import omok.model.board.BoardPositionState

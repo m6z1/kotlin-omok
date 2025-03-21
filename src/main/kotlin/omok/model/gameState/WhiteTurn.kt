@@ -1,9 +1,9 @@
 package omok.model.gameState
 
 import omok.model.Stone
+import omok.model.adapter.RuleAdapter
 import omok.model.board.Board
 import omok.model.position.Position
-import omok.model.rule.RuleAdapter
 import omok.model.rule.WhiteWinRule
 
 object WhiteTurn : GameState.Playing {
