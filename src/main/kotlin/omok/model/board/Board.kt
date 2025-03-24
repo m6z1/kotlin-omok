@@ -68,11 +68,6 @@ class DefaultBoard(
             } ?: throw IllegalArgumentException("$position 는 존재하지 않는 위치 입니다.")
 
     companion object {
-        operator fun invoke(sideLength: GridElement): DefaultBoard {
-            val defaultPositions: Set<BoardPosition> = defaultPositions(sideLength.value)
-            return DefaultBoard(defaultPositions, sideLength)
-        }
-
         operator fun invoke(sideLength: Int = 15): DefaultBoard {
             val defaultPositions: Set<BoardPosition> = defaultPositions(sideLength)
             return DefaultBoard(defaultPositions, GridElement(sideLength))
