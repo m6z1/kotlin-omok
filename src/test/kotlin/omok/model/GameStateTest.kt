@@ -20,7 +20,7 @@ class GameStateTest {
 
         val actual = blackTurn.play(BLACK_WIN_BOARD_IF_PUT_1_5, POSITION_1_5)
 
-        assertThat(actual).isEqualTo(GameState.Finish.BLACK_WIN)
+        assertThat(actual).isEqualTo(GameState.Finish(Stone.BLACK))
     }
 
     @Test
@@ -47,7 +47,7 @@ class GameStateTest {
 
         val actual = whiteTurn.play(WHITE_WIN_BOARD_IF_PUT_1_0, POSITION_1_0)
 
-        assertThat(actual).isEqualTo(GameState.Finish.WHITE_WIN)
+        assertThat(actual).isEqualTo(GameState.Finish(Stone.WHITE))
     }
 
     @Test

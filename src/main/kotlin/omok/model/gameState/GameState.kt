@@ -14,7 +14,7 @@ interface GameState {
         ): GameState
     }
 
-    class Finish(
+    data class Finish(
         override val stone: Stone,
     ) : GameState
 }
