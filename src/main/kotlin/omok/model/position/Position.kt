@@ -13,6 +13,6 @@ data class DefaultPosition(
         operator fun invoke(
             row: Int,
             column: Int,
-        ) = DefaultPosition(DefaultGridElement(row), DefaultGridElement(column))
+        ) = DefaultPosition(GridElement(row), GridElement(column))
     }
 }

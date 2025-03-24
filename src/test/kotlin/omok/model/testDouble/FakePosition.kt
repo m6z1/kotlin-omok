@@ -4,8 +4,8 @@ import omok.model.position.GridElement
 import omok.model.position.Position
 
 class FakePosition : Position {
-    override val row: GridElement = FakeGridElement()
-    override val column: GridElement = FakeGridElement()
+    override val row: GridElement = GridElement(5)
+    override val column: GridElement = GridElement(5)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

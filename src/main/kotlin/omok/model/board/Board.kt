@@ -1,7 +1,6 @@
 package omok.model.board
 
 import omok.model.Stone
-import omok.model.position.DefaultGridElement
 import omok.model.position.DefaultPosition
 import omok.model.position.GridElement
 import omok.model.position.Position
@@ -31,7 +30,7 @@ interface Board {
 
 class DefaultBoard(
     positions: Set<BoardPosition>,
-    override val sideLength: GridElement = DefaultGridElement(15),
+    override val sideLength: GridElement = GridElement(15),
 ) : Board {
     override var positions: Set<BoardPosition> = positions.toSet()
         private set
@@ -76,7 +75,7 @@ class DefaultBoard(
 
         operator fun invoke(sideLength: Int = 15): DefaultBoard {
             val defaultPositions: Set<BoardPosition> = defaultPositions(sideLength)
-            return DefaultBoard(defaultPositions, DefaultGridElement(sideLength))
+            return DefaultBoard(defaultPositions, GridElement(sideLength))
         }
 
         private fun defaultPositions(size: Int): Set<BoardPosition> =

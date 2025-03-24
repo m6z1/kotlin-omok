@@ -1,7 +1,7 @@
 package omok.model
 
 import omok.model.position.DefaultPosition
-import omok.model.testDouble.FakeGridElement
+import omok.model.position.GridElement
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.assertAll
 class PositionTest {
     @Test
     fun `위치는 행과 열로 이뤄져있다`() {
-        val position = DefaultPosition(FakeGridElement(), FakeGridElement())
+        val position = DefaultPosition(GridElement(5), GridElement(5))
 
         assertAll(
             { assertThat(position.row.value).isEqualTo(5) },
