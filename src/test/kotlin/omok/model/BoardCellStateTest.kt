@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 
-class BoardPositionStateTest {
+class BoardCellStateTest {
     @Test
     fun `오목판 위치의 상태는 비어있음, 흑돌 있음, 백돌 있음 중 하나이다`() {
         assertAll(

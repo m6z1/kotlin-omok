@@ -1,10 +1,10 @@
 package omok.model
 
 import omok.model.board.Board
-import omok.model.board.BoardPosition
+import omok.model.board.BoardCell
 import omok.model.board.BoardPositionState
 import omok.model.board.DefaultBoard
-import omok.model.board.DefaultBoardPosition
+import omok.model.board.DefaultBoardCell
 import omok.model.position.DefaultPosition
 import omok.model.position.Position
 import org.assertj.core.api.Assertions.assertThat
@@ -25,7 +25,7 @@ class BoardTest {
     fun `특정 위치에 있는 오목판의 상태를 알 수 있다`() {
         // given:
         val position: Position = DefaultPosition(1, 2)
-        val board: Board = DefaultBoard(DefaultBoardPosition(position, BoardPositionState.Exist.White))
+        val board: Board = DefaultBoard(DefaultBoardCell(position, BoardPositionState.Exist.White))
 
         // when:
         val actual: BoardPositionState = board.stateAt(position)
@@ -38,8 +38,8 @@ class BoardTest {
     fun `원하는 위치에 돌을 둘 수 있다`() {
         // given:
         val position: Position = DefaultPosition(1, 2)
-        val boardPosition: BoardPosition = DefaultBoardPosition(position)
-        val board: Board = DefaultBoard(boardPosition)
+        val boardCell: BoardCell = DefaultBoardCell(position)
+        val board: Board = DefaultBoard(boardCell)
 
         // when:
         board.put(position, Stone.WHITE)

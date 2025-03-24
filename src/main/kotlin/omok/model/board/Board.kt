@@ -6,7 +6,7 @@ import omok.model.position.GridElement
 import omok.model.position.Position
 
 interface Board {
-    val positions: Set<BoardPosition>
+    val positions: Set<BoardCell>
     val sideLength: GridElement
 
     fun put(
@@ -29,19 +29,19 @@ interface Board {
 }
 
 class DefaultBoard(
-    positions: Set<BoardPosition>,
+    positions: Set<BoardCell>,
     override val sideLength: GridElement = GridElement(15),
 ) : Board {
-    override var positions: Set<BoardPosition> = positions.toSet()
+    override var positions: Set<BoardCell> = positions.toSet()
         private set
 
-    constructor(position: BoardPosition) : this(setOf(position))
+    constructor(position: BoardCell) : this(setOf(position))
 
     override fun put(
         position: Position,
         stone: Stone,
     ) {
-        val targetPosition: BoardPosition = boardPosition(position)
+        val targetPosition: BoardCell = boardPosition(position)
         positions -= targetPosition
         positions += targetPosition.withStone(stone)
     }
@@ -61,7 +61,7 @@ class DefaultBoard(
         column: Int,
     ): BoardPositionState = stateAt(DefaultPosition(row, column))
 
-    private fun boardPosition(position: Position): BoardPosition =
+    private fun boardPosition(position: Position): BoardCell =
         positions
             .find { boardPosition ->
                 position == boardPosition.position
@@ -69,16 +69,16 @@ class DefaultBoard(
 
     companion object {
         operator fun invoke(sideLength: Int = 15): DefaultBoard {
-            val defaultPositions: Set<BoardPosition> = defaultPositions(sideLength)
+            val defaultPositions: Set<BoardCell> = defaultPositions(sideLength)
             return DefaultBoard(defaultPositions, GridElement(sideLength))
         }
 
-        private fun defaultPositions(size: Int): Set<BoardPosition> =
+        private fun defaultPositions(size: Int): Set<BoardCell> =
             (0 until size)
                 .flatMap { row: Int ->
                     (0 until size).map { column: Int ->
                         val position = DefaultPosition(row, column)
-                        DefaultBoardPosition(position)
+                        DefaultBoardCell(position)
                     }
                 }.toSet()
     }
