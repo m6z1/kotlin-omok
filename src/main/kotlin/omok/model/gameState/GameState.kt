@@ -14,10 +14,7 @@ interface GameState {
         ): GameState
     }
 
-    enum class Finish(
+    class Finish(
         override val stone: Stone,
-    ) : GameState {
-        BLACK_WIN(Stone.BLACK),
-        WHITE_WIN(Stone.WHITE),
-    }
+    ) : GameState
 }

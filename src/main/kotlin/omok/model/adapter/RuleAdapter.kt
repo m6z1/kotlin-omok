@@ -30,7 +30,7 @@ object RuleAdapter {
         val adaptedBoard: List<List<Int>> = board.toMatrix()
         val adaptedPosition: Pair<Int, Int> = position.toCoordinates()
         return when {
-            BlackWinRule.validated(adaptedBoard, adaptedPosition) -> GameState.Finish.BLACK_WIN
+            BlackWinRule.validated(adaptedBoard, adaptedPosition) -> GameState.Finish(Stone.BLACK)
             FourFourRule.validated(adaptedBoard, adaptedPosition) -> BlackTurn
             ThreeThreeRule.validated(adaptedBoard, adaptedPosition) -> BlackTurn
             else -> WhiteTurn
@@ -44,7 +44,7 @@ object RuleAdapter {
         val adaptedBoard: List<List<Int>> = board.toMatrix()
         val adaptedPosition: Pair<Int, Int> = position.toCoordinates()
         if (WhiteWinRule.validated(adaptedBoard, adaptedPosition)) {
-            return GameState.Finish.WHITE_WIN
+            return GameState.Finish(Stone.WHITE)
         }
         return BlackTurn
     }
