@@ -18,10 +18,11 @@ class Omok(
         while (currentTurn is GameState.Playing) {
             val lastTurn: GameState.Playing = currentTurn
             currentTurn = currentTurn.play(board, position)
+            if (currentTurn.forbidden(lastTurn)) omokView.notifyForbiddenPosition()
             lastPosition = lastPosition(currentTurn, lastTurn, lastPosition, position)
             omokView.show(board)
             if (currentTurn is GameState.Finish) break
-            position = position(currentTurn, board, lastPosition, lastTurn)
+            position = position(currentTurn, board, lastPosition)
         }
         omokView.show(currentTurn.stone)
     }
@@ -36,13 +37,11 @@ class Omok(
         currentTurn: GameState,
         board: Board,
         lastPosition: Position? = null,
-        lastTurn: GameState.Playing? = null,
     ): Position =
         omokView.position(
             stone = currentTurn.stone,
             boundary = board.sideLength.value,
             lastPosition = lastPosition,
-            forbiddenPosition = if (currentTurn.forbidden(lastTurn)) lastPosition else null,
         )
 
     private fun lastPosition(
