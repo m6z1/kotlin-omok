@@ -1,12 +1,13 @@
 package omok.model
 
-import omok.model.board.DefaultBoard
+import omok.model.board.Board
 import omok.model.gameState.BlackTurn
 import omok.model.gameState.GameState
 import omok.model.position.Position
 
-class OmokGame {
-    val board = DefaultBoard()
+class OmokGame(
+    val board: Board,
+) {
     var currentTurn: GameState = BlackTurn
         private set
     var lastPosition: Position? = null
