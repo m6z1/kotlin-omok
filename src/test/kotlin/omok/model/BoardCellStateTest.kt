@@ -23,7 +23,7 @@ class BoardCellStateTest {
         val state = BoardPositionState.Exist.White
 
         // then:
-        assertThrows<IllegalStateException> { state.withStone(Stone.BLACK) }
+        assertThrows<IllegalStateException> { state.replace(Stone.BLACK) }
     }
 
     @Test
@@ -32,7 +32,7 @@ class BoardCellStateTest {
         val state = BoardPositionState.Empty
 
         // when:
-        val actual = state.withStone(Stone.BLACK)
+        val actual = state.replace(Stone.BLACK)
 
         // then:
         assertThat(actual).isEqualTo(BoardPositionState.Exist.Black)
@@ -44,7 +44,7 @@ class BoardCellStateTest {
         val state = BoardPositionState.Empty
 
         // when:
-        val actual = state.withStone(Stone.WHITE)
+        val actual = state.replace(Stone.WHITE)
 
         // then:
         assertThat(actual).isEqualTo(BoardPositionState.Exist.White)

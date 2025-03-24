@@ -52,7 +52,7 @@ object RuleAdapter {
     private fun Board.toMatrix(): List<List<Int>> =
         List(sideLength.value) { column ->
             List(sideLength.value) { row ->
-                val state = stateAt(row, column)
+                val state = getBoardCellState(row, column)
                 when (state) {
                     BoardPositionState.Empty -> 0
                     BoardPositionState.Exist.Black -> 1

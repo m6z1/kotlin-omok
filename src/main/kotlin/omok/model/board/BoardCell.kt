@@ -7,12 +7,12 @@ interface BoardCell {
     val position: Position
     val state: BoardPositionState
 
-    fun withStone(stone: Stone): BoardCell
+    fun replace(stone: Stone): BoardCell
 }
 
 data class DefaultBoardCell(
     override val position: Position,
     override val state: BoardPositionState = BoardPositionState.Empty,
 ) : BoardCell {
-    override fun withStone(stone: Stone): BoardCell = copy(state = state.withStone(stone))
+    override fun replace(stone: Stone): BoardCell = copy(state = state.replace(stone))
 }

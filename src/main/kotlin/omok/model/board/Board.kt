@@ -20,9 +20,9 @@ interface Board {
         stone: Stone,
     )
 
-    fun stateAt(position: Position): BoardPositionState
+    fun getBoardCellState(position: Position): BoardPositionState
 
-    fun stateAt(
+    fun getBoardCellState(
         row: Int,
         column: Int,
     ): BoardPositionState
@@ -41,9 +41,9 @@ class DefaultBoard(
         position: Position,
         stone: Stone,
     ) {
-        val targetPosition: BoardCell = boardPosition(position)
+        val targetPosition: BoardCell = getBoardCell(position)
         positions -= targetPosition
-        positions += targetPosition.withStone(stone)
+        positions += targetPosition.replace(stone)
     }
 
     override fun put(
@@ -54,14 +54,14 @@ class DefaultBoard(
         put(DefaultPosition(row, column), stone)
     }
 
-    override fun stateAt(position: Position): BoardPositionState = boardPosition(position).state
+    override fun getBoardCellState(position: Position): BoardPositionState = getBoardCell(position).state
 
-    override fun stateAt(
+    override fun getBoardCellState(
         row: Int,
         column: Int,
-    ): BoardPositionState = stateAt(DefaultPosition(row, column))
+    ): BoardPositionState = getBoardCellState(DefaultPosition(row, column))
 
-    private fun boardPosition(position: Position): BoardCell =
+    private fun getBoardCell(position: Position): BoardCell =
         positions
             .find { boardPosition ->
                 position == boardPosition.position

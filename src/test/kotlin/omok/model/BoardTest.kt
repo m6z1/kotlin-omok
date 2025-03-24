@@ -28,7 +28,7 @@ class BoardTest {
         val board: Board = DefaultBoard(DefaultBoardCell(position, BoardPositionState.Exist.White))
 
         // when:
-        val actual: BoardPositionState = board.stateAt(position)
+        val actual: BoardPositionState = board.getBoardCellState(position)
 
         // then:
         assertThat(actual).isEqualTo(BoardPositionState.Exist.White)
@@ -45,6 +45,6 @@ class BoardTest {
         board.put(position, Stone.WHITE)
 
         // then:
-        assertThat(board.stateAt(position)).isEqualTo(BoardPositionState.Exist.White)
+        assertThat(board.getBoardCellState(position)).isEqualTo(BoardPositionState.Exist.White)
     }
 }

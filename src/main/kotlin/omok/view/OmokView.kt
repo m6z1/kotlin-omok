@@ -7,12 +7,12 @@ import omok.model.position.DefaultPosition
 import omok.model.position.Position
 
 class OmokView {
-    fun start(board: Board) {
+    fun showStartMessage(board: Board) {
         println("오목 게임을 시작합니다.\n")
-        show(board)
+        showBoard(board)
     }
 
-    fun position(
+    fun readPosition(
         stone: Stone,
         boundary: Int,
         lastPosition: Position? = null,
@@ -27,11 +27,11 @@ class OmokView {
         println("해당 위치는 금수입니다.")
     }
 
-    fun show(board: Board) {
+    fun showBoard(board: Board) {
         val boardToList: List<List<BoardPositionState>> =
             List(board.sideLength.value) { column ->
                 List(board.sideLength.value) { row ->
-                    board.stateAt(row, column)
+                    board.getBoardCellState(row, column)
                 }
             }
 
@@ -87,7 +87,7 @@ class OmokView {
         return range.joinToString(separator = "  ", prefix = "    ")
     }
 
-    fun show(winner: Stone) {
+    fun showWinner(winner: Stone) {
         println("${winner.toUIModel()}돌이 이겼습니다.")
     }
 
