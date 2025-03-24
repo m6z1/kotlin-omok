@@ -2,7 +2,7 @@ package omok.view
 
 import omok.model.Stone
 import omok.model.board.Board
-import omok.model.board.BoardPositionState
+import omok.model.board.BoardCellState
 import omok.model.position.DefaultPosition
 import omok.model.position.Position
 
@@ -28,7 +28,7 @@ class OmokView {
     }
 
     fun showBoard(board: Board) {
-        val boardToList: List<List<BoardPositionState>> =
+        val boardToList: List<List<BoardCellState>> =
             List(board.sideLength.value) { column ->
                 List(board.sideLength.value) { row ->
                     board.getBoardCellState(row, column)
@@ -37,12 +37,12 @@ class OmokView {
 
         val lastIndex = board.sideLength.value - 1
         val boundary = board.sideLength.value
-        boardToList.forEachIndexed { columnIndex: Int, row: List<BoardPositionState> ->
-            row.forEachIndexed { rowIndex: Int, state: BoardPositionState ->
+        boardToList.forEachIndexed { columnIndex: Int, row: List<BoardCellState> ->
+            row.forEachIndexed { rowIndex: Int, state: BoardCellState ->
                 val wantToShow: String =
                     columnIndex(rowIndex, columnIndex, boundary) +
                         when (state) {
-                            BoardPositionState.Empty -> {
+                            BoardCellState.Empty -> {
                                 when {
                                     rowIndex == 0 && columnIndex == 0 -> "┌"
                                     rowIndex == 0 && columnIndex == lastIndex -> "└"
@@ -56,8 +56,8 @@ class OmokView {
                                 }
                             }
 
-                            BoardPositionState.Exist.Black -> "●"
-                            BoardPositionState.Exist.White -> "○"
+                            BoardCellState.Exist.Black -> "●"
+                            BoardCellState.Exist.White -> "○"
                         } + if (rowIndex == lastIndex) "" else "──"
                 print(wantToShow)
             }

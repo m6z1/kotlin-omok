@@ -2,10 +2,10 @@ package omok.model.board
 
 import omok.model.Stone
 
-sealed interface BoardPositionState {
-    data object Empty : BoardPositionState
+sealed interface BoardCellState {
+    data object Empty : BoardCellState
 
-    enum class Exist : BoardPositionState {
+    enum class Exist : BoardCellState {
         Black,
         White,
     }

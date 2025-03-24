@@ -5,14 +5,14 @@ import omok.model.position.Position
 
 interface BoardCell {
     val position: Position
-    val state: BoardPositionState
+    val state: BoardCellState
 
     fun replace(stone: Stone): BoardCell
 }
 
 data class DefaultBoardCell(
     override val position: Position,
-    override val state: BoardPositionState = BoardPositionState.Empty,
+    override val state: BoardCellState = BoardCellState.Empty,
 ) : BoardCell {
     override fun replace(stone: Stone): BoardCell = copy(state = state.replace(stone))
 }

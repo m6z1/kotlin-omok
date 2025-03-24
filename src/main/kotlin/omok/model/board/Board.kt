@@ -20,12 +20,12 @@ interface Board {
         stone: Stone,
     )
 
-    fun getBoardCellState(position: Position): BoardPositionState
+    fun getBoardCellState(position: Position): BoardCellState
 
     fun getBoardCellState(
         row: Int,
         column: Int,
-    ): BoardPositionState
+    ): BoardCellState
 }
 
 class DefaultBoard(
@@ -54,12 +54,12 @@ class DefaultBoard(
         put(DefaultPosition(row, column), stone)
     }
 
-    override fun getBoardCellState(position: Position): BoardPositionState = getBoardCell(position).state
+    override fun getBoardCellState(position: Position): BoardCellState = getBoardCell(position).state
 
     override fun getBoardCellState(
         row: Int,
         column: Int,
-    ): BoardPositionState = getBoardCellState(DefaultPosition(row, column))
+    ): BoardCellState = getBoardCellState(DefaultPosition(row, column))
 
     private fun getBoardCell(position: Position): BoardCell =
         positions

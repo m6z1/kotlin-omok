@@ -2,7 +2,7 @@ package omok.model
 
 import omok.model.board.Board
 import omok.model.board.BoardCell
-import omok.model.board.BoardPositionState
+import omok.model.board.BoardCellState
 import omok.model.board.DefaultBoard
 import omok.model.board.DefaultBoardCell
 import omok.model.position.DefaultPosition
@@ -25,13 +25,13 @@ class BoardTest {
     fun `특정 위치에 있는 오목판의 상태를 알 수 있다`() {
         // given:
         val position: Position = DefaultPosition(1, 2)
-        val board: Board = DefaultBoard(DefaultBoardCell(position, BoardPositionState.Exist.White))
+        val board: Board = DefaultBoard(DefaultBoardCell(position, BoardCellState.Exist.White))
 
         // when:
-        val actual: BoardPositionState = board.getBoardCellState(position)
+        val actual: BoardCellState = board.getBoardCellState(position)
 
         // then:
-        assertThat(actual).isEqualTo(BoardPositionState.Exist.White)
+        assertThat(actual).isEqualTo(BoardCellState.Exist.White)
     }
 
     @Test
@@ -45,6 +45,6 @@ class BoardTest {
         board.put(position, Stone.WHITE)
 
         // then:
-        assertThat(board.getBoardCellState(position)).isEqualTo(BoardPositionState.Exist.White)
+        assertThat(board.getBoardCellState(position)).isEqualTo(BoardCellState.Exist.White)
     }
 }

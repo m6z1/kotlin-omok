@@ -2,7 +2,7 @@ package omok.model.adapter
 
 import omok.model.Stone
 import omok.model.board.Board
-import omok.model.board.BoardPositionState
+import omok.model.board.BoardCellState
 import omok.model.gameState.BlackTurn
 import omok.model.gameState.GameState
 import omok.model.gameState.WhiteTurn
@@ -54,9 +54,9 @@ object RuleAdapter {
             List(sideLength.value) { row ->
                 val state = getBoardCellState(row, column)
                 when (state) {
-                    BoardPositionState.Empty -> 0
-                    BoardPositionState.Exist.Black -> 1
-                    BoardPositionState.Exist.White -> 2
+                    BoardCellState.Empty -> 0
+                    BoardCellState.Exist.Black -> 1
+                    BoardCellState.Exist.White -> 2
                 }
             }
         }
