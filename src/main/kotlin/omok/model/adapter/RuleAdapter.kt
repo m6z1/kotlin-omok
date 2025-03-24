@@ -5,11 +5,11 @@ import omok.model.board.BoardPositionState
 import omok.model.position.Position
 
 object RuleAdapter {
-    fun adapt(board: Board): List<List<Int>> {
+    fun Board.toMatrix(): List<List<Int>> {
         val adapted =
-            List(board.sideLength.value) { column ->
-                List(board.sideLength.value) { row ->
-                    val state = board.stateAt(row, column)
+            List(sideLength.value) { column ->
+                List(sideLength.value) { row ->
+                    val state = stateAt(row, column)
                     when (state) {
                         BoardPositionState.Empty -> 0
                         BoardPositionState.Exist.Black -> 1
@@ -20,5 +20,5 @@ object RuleAdapter {
         return adapted
     }
 
-    fun adapt(position: Position): Pair<Int, Int> = Pair(position.row.value, position.column.value)
+    fun Position.toCoordinates(): Pair<Int, Int> = Pair(row.value, column.value)
 }

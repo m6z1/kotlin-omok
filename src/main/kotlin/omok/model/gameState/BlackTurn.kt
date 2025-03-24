@@ -1,7 +1,8 @@
 package omok.model.gameState
 
 import omok.model.Stone
-import omok.model.adapter.RuleAdapter
+import omok.model.adapter.RuleAdapter.toCoordinates
+import omok.model.adapter.RuleAdapter.toMatrix
 import omok.model.board.Board
 import omok.model.position.Position
 import omok.model.rule.BlackWinRule
@@ -15,8 +16,8 @@ object BlackTurn : GameState.Playing {
         board: Board,
         position: Position,
     ): GameState {
-        val adaptedBoard: List<List<Int>> = RuleAdapter.adapt(board)
-        val adaptedPosition: Pair<Int, Int> = RuleAdapter.adapt(position)
+        val adaptedBoard: List<List<Int>> = board.toMatrix()
+        val adaptedPosition: Pair<Int, Int> = position.toCoordinates()
         return when {
             BlackWinRule.validated(adaptedBoard, adaptedPosition) -> blackWin(board, position)
             FourFourRule.validated(adaptedBoard, adaptedPosition) -> this
