@@ -6,11 +6,11 @@ import omok.model.gameState.GameState
 import omok.model.position.Position
 import omok.view.OmokView
 
-class Omok(
+class OmokController(
     private val omokView: OmokView,
     private val omokGame: OmokGame,
 ) {
-    fun start() {
+    fun run() {
         omokView.showStartMessage(omokGame.board)
 
         while (omokGame.currentTurn is GameState.Playing) {
