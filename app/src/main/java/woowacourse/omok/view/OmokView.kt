@@ -27,43 +27,28 @@ class OmokView {
     }
 
     fun showBoard(board: Board) {
-        val boardToList: List<List<BoardCellState>> =
-            List(board.sideLength.value) { column ->
-                List(board.sideLength.value) { row ->
-                    board.getBoardCellState(row, column)
-                }
-            }
-
+        val boardToList: List<List<BoardCellState>> = getMatrix(board)
         val lastIndex = board.sideLength.value - 1
         val boundary = board.sideLength.value
         boardToList.forEachIndexed { columnIndex: Int, row: List<BoardCellState> ->
             row.forEachIndexed { rowIndex: Int, state: BoardCellState ->
                 val wantToShow: String =
                     columnIndex(rowIndex, columnIndex, boundary) +
-                        when (state) {
-                            BoardCellState.Empty -> {
-                                when {
-                                    rowIndex == 0 && columnIndex == 0 -> "┌"
-                                    rowIndex == 0 && columnIndex == lastIndex -> "└"
-                                    rowIndex == lastIndex && columnIndex == lastIndex -> "┘"
-                                    rowIndex == lastIndex && columnIndex == 0 -> "┐"
-                                    columnIndex == 0 -> "┬"
-                                    columnIndex == lastIndex -> "┴"
-                                    rowIndex == 0 -> "├"
-                                    rowIndex == lastIndex -> "┤"
-                                    else -> "┼"
-                                }
-                            }
-
-                            BoardCellState.Exist.Black -> "●"
-                            BoardCellState.Exist.White -> "○"
-                        } + if (rowIndex == lastIndex) "" else "──"
+                        boardCellState(state, rowIndex, columnIndex, lastIndex) +
+                        cellDivider(rowIndex, lastIndex)
                 print(wantToShow)
             }
             println()
         }
         println(rowIndex(lastIndex))
     }
+
+    private fun getMatrix(board: Board) =
+        List(board.sideLength.value) { column ->
+            List(board.sideLength.value) { row ->
+                board.getBoardCellState(row, column)
+            }
+        }
 
     private fun columnIndex(
         rowIndex: Int,
@@ -80,6 +65,36 @@ class OmokView {
         } else {
             ""
         }
+
+    private fun boardCellState(
+        state: BoardCellState,
+        rowIndex: Int,
+        columnIndex: Int,
+        lastIndex: Int,
+    ): String =
+        when (state) {
+            BoardCellState.Empty -> {
+                when {
+                    rowIndex == 0 && columnIndex == 0 -> "┌"
+                    rowIndex == 0 && columnIndex == lastIndex -> "└"
+                    rowIndex == lastIndex && columnIndex == lastIndex -> "┘"
+                    rowIndex == lastIndex && columnIndex == 0 -> "┐"
+                    columnIndex == 0 -> "┬"
+                    columnIndex == lastIndex -> "┴"
+                    rowIndex == 0 -> "├"
+                    rowIndex == lastIndex -> "┤"
+                    else -> "┼"
+                }
+            }
+
+            BoardCellState.Exist.Black -> "●"
+            BoardCellState.Exist.White -> "○"
+        }
+
+    private fun cellDivider(
+        rowIndex: Int,
+        lastIndex: Int,
+    ) = if (rowIndex == lastIndex) "" else "──"
 
     private fun rowIndex(lastIndex: Int): String {
         val range = Char(65)..Char(65 + lastIndex)
