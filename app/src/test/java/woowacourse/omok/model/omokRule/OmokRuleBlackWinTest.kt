@@ -1,9 +1,9 @@
-package omok.domain.omokRule
+package woowacourse.omok.model.omokRule
 
-import omok.model.rule.BlackWinRule
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import woowacourse.omok.model.rule.BlackWinRule
 
 class OmokRuleBlackWinTest {
     private var board = MutableList(15) { MutableList(15) { 0 } }

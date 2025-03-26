@@ -1,10 +1,10 @@
-package omok.controller
+package woowacourse.omok.controller
 
-import omok.model.OmokGame
-import omok.model.board.Board
-import omok.model.gameState.GameState
-import omok.model.position.Position
-import omok.view.OmokView
+import woowacourse.omok.model.OmokGame
+import woowacourse.omok.model.board.Board
+import woowacourse.omok.model.gameState.GameState
+import woowacourse.omok.model.position.Position
+import woowacourse.omok.view.OmokView
 
 class OmokController(
     private val omokView: OmokView,
@@ -14,7 +14,8 @@ class OmokController(
         omokView.showStartMessage(omokGame.board)
 
         while (omokGame.currentTurn is GameState.Playing) {
-            val position: Position = getPosition(omokGame.currentTurn, omokGame.board, omokGame.lastPosition)
+            val position: Position =
+                getPosition(omokGame.currentTurn, omokGame.board, omokGame.lastPosition)
             val currentState: GameState = omokGame.play(position)
 
             if (omokGame.forbiddenPosition(currentState)) {

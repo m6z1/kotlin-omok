@@ -1,10 +1,10 @@
-package omok.domain.omokRule
+package woowacourse.omok.model.omokRule
 
-import omok.model.rule.Rule
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import woowacourse.omok.model.rule.Rule
 
 class OmokRuleTest {
     private var board = MutableList(15) { MutableList(15) { 0 } }

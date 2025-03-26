@@ -1,16 +1,16 @@
-package omok.model.adapter
+package woowacourse.omok.model.adapter
 
-import omok.model.Stone
-import omok.model.board.Board
-import omok.model.board.BoardCellState
-import omok.model.gameState.BlackTurn
-import omok.model.gameState.GameState
-import omok.model.gameState.WhiteTurn
-import omok.model.position.Position
-import omok.model.rule.BlackWinRule
-import omok.model.rule.FourFourRule
-import omok.model.rule.ThreeThreeRule
-import omok.model.rule.WhiteWinRule
+import woowacourse.omok.model.Stone
+import woowacourse.omok.model.board.Board
+import woowacourse.omok.model.board.BoardCellState
+import woowacourse.omok.model.gameState.BlackTurn
+import woowacourse.omok.model.gameState.GameState
+import woowacourse.omok.model.gameState.WhiteTurn
+import woowacourse.omok.model.position.Position
+import woowacourse.omok.model.rule.BlackWinRule
+import woowacourse.omok.model.rule.FourFourRule
+import woowacourse.omok.model.rule.ThreeThreeRule
+import woowacourse.omok.model.rule.WhiteWinRule
 
 object RuleAdapter {
     fun getState(

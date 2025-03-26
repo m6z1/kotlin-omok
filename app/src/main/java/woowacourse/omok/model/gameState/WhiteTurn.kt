@@ -1,9 +1,9 @@
-package omok.model.gameState
+package woowacourse.omok.model.gameState
 
-import omok.model.Stone
-import omok.model.adapter.RuleAdapter
-import omok.model.board.Board
-import omok.model.position.Position
+import woowacourse.omok.model.Stone
+import woowacourse.omok.model.adapter.RuleAdapter
+import woowacourse.omok.model.board.Board
+import woowacourse.omok.model.position.Position
 
 object WhiteTurn : GameState.Playing {
     override val stone: Stone = Stone.WHITE

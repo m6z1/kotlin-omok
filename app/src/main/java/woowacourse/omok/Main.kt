@@ -1,13 +1,13 @@
-package omok
+package woowacourse.omok
 
-import omok.controller.OmokController
-import omok.model.OmokGame
-import omok.model.board.DefaultBoard
-import omok.view.OmokView
+import woowacourse.omok.controller.OmokController
+import woowacourse.omok.model.OmokGame
+import woowacourse.omok.model.board.Board
+import woowacourse.omok.view.OmokView
 
 fun main() {
     val omokView = OmokView()
-    val board = DefaultBoard()
+    val board = Board()
     val omokGame = OmokGame(board)
     OmokController(omokView, omokGame).run()
 }

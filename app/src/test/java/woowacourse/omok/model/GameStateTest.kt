@@ -1,17 +1,17 @@
-package omok.model
+package woowacourse.omok.model
 
-import omok.model.gameState.BlackTurn
-import omok.model.gameState.GameState
-import omok.model.gameState.WhiteTurn
-import omok.model.testDouble.BLACK_FORBIDDEN_BOARD_IF_PUT_1_1
-import omok.model.testDouble.BLACK_WIN_BOARD_IF_PUT_1_5
-import omok.model.testDouble.EMPTY_BOARD
-import omok.model.testDouble.POSITION_1_0
-import omok.model.testDouble.POSITION_1_1
-import omok.model.testDouble.POSITION_1_5
-import omok.model.testDouble.WHITE_WIN_BOARD_IF_PUT_1_0
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import woowacourse.omok.model.gameState.BlackTurn
+import woowacourse.omok.model.gameState.GameState
+import woowacourse.omok.model.gameState.WhiteTurn
+import woowacourse.omok.model.testDouble.BLACK_FORBIDDEN_BOARD_IF_PUT_1_1
+import woowacourse.omok.model.testDouble.BLACK_WIN_BOARD_IF_PUT_1_5
+import woowacourse.omok.model.testDouble.EMPTY_BOARD
+import woowacourse.omok.model.testDouble.POSITION_1_0
+import woowacourse.omok.model.testDouble.POSITION_1_1
+import woowacourse.omok.model.testDouble.POSITION_1_5
+import woowacourse.omok.model.testDouble.WHITE_WIN_BOARD_IF_PUT_1_0
 
 class GameStateTest {
     @Test

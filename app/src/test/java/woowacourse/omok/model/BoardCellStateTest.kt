@@ -1,10 +1,10 @@
-package omok.model
+package woowacourse.omok.model
 
-import omok.model.board.BoardCellState
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
+import woowacourse.omok.model.board.BoardCellState
 
 class BoardCellStateTest {
     @Test

@@ -1,9 +1,9 @@
-package omok.model
+package woowacourse.omok.model
 
-import omok.model.board.Board
-import omok.model.gameState.BlackTurn
-import omok.model.gameState.GameState
-import omok.model.position.Position
+import woowacourse.omok.model.board.Board
+import woowacourse.omok.model.gameState.BlackTurn
+import woowacourse.omok.model.gameState.GameState
+import woowacourse.omok.model.position.Position
 
 class OmokGame(
     val board: Board,

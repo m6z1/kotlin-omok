@@ -1,4 +1,4 @@
-package omok.model.rule
+package woowacourse.omok.model.rule
 
 object BlackWinRule : Rule() {
     override fun validated(

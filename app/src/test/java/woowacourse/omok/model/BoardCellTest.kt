@@ -1,20 +1,19 @@
-package omok.model
+package woowacourse.omok.model
 
-import omok.model.board.BoardCell
-import omok.model.board.BoardCellState
-import omok.model.board.DefaultBoardCell
-import omok.model.testDouble.FakePosition
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import woowacourse.omok.model.board.BoardCell
+import woowacourse.omok.model.board.BoardCellState
+import woowacourse.omok.model.testDouble.POSITION_5_5
 
 class BoardCellTest {
     @Test
     fun `오목판 위치에는 좌표와 상태를 가진다`() {
         val boardCell: BoardCell =
-            DefaultBoardCell(position = FakePosition(), state = BoardCellState.Empty)
+            BoardCell(position = POSITION_5_5, state = BoardCellState.Empty)
         assertAll({
-            assertThat(boardCell.position).isEqualTo(FakePosition())
+            assertThat(boardCell.position).isEqualTo(POSITION_5_5)
             assertThat(boardCell.state).isEqualTo(BoardCellState.Empty)
         })
     }

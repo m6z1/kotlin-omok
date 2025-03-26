@@ -1,6 +1,6 @@
-package omok.model.board
+package woowacourse.omok.model.board
 
-import omok.model.Stone
+import woowacourse.omok.model.Stone
 
 sealed interface BoardCellState {
     data object Empty : BoardCellState

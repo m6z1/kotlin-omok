@@ -1,10 +1,9 @@
-package omok.view
+package woowacourse.omok.view
 
-import omok.model.Stone
-import omok.model.board.Board
-import omok.model.board.BoardCellState
-import omok.model.position.DefaultPosition
-import omok.model.position.Position
+import woowacourse.omok.model.Stone
+import woowacourse.omok.model.board.Board
+import woowacourse.omok.model.board.BoardCellState
+import woowacourse.omok.model.position.Position
 
 class OmokView {
     fun showStartMessage(board: Board) {
@@ -102,6 +101,6 @@ class OmokView {
     private fun String.toPosition(boundary: Int): Position {
         val row: Int = this.first { !it.isDigit() } - 'A'
         val column: Int = boundary - this.filter { it.isDigit() }.toInt()
-        return DefaultPosition(row, column)
+        return Position(row, column)
     }
 }

@@ -1,8 +1,8 @@
-package omok.model
+package woowacourse.omok.model
 
-import omok.model.position.GridElement
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import woowacourse.omok.model.position.GridElement
 
 class GridElementTest {
     @Test
