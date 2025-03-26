@@ -13,7 +13,7 @@ class OmokGame(
     var lastPosition: Position? = null
         private set
 
-    fun play(position: Position): GameState {
+    fun getTurnState(position: Position): GameState {
         val lastTurn: GameState.Playing = currentTurn as GameState.Playing
         currentTurn = lastTurn.play(board, position)
         updateLastPosition(position, lastTurn)

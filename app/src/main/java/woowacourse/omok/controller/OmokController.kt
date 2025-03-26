@@ -16,7 +16,7 @@ class OmokController(
         while (omokGame.currentTurn is GameState.Playing) {
             val position: Position =
                 getPosition(omokGame.currentTurn, omokGame.board, omokGame.lastPosition)
-            val currentState: GameState = omokGame.play(position)
+            val currentState: GameState = omokGame.getTurnState(position)
 
             if (omokGame.forbiddenPosition(currentState)) {
                 omokView.notifyForbiddenPosition()
