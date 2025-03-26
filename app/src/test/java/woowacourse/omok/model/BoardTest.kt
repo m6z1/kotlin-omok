@@ -21,14 +21,14 @@ class BoardTest {
     @Test
     fun `특정 위치에 있는 오목판의 상태를 알 수 있다`() {
         // given:
-        val position: Position = Position(1, 2)
-        val board: Board = Board(BoardCell(position, BoardCellState.Exist.White))
+        val position = Position(1, 2)
+        val board = Board(BoardCell(position, BoardCellState.Exist(Stone.WHITE)))
 
         // when:
         val actual: BoardCellState = board.getBoardCellState(position)
 
         // then:
-        assertThat(actual).isEqualTo(BoardCellState.Exist.White)
+        assertThat(actual).isEqualTo(BoardCellState.Exist(Stone.WHITE))
     }
 
     @Test
@@ -42,6 +42,6 @@ class BoardTest {
         board.put(position, Stone.WHITE)
 
         // then:
-        assertThat(board.getBoardCellState(position)).isEqualTo(BoardCellState.Exist.White)
+        assertThat(board.getBoardCellState(position)).isEqualTo(BoardCellState.Exist(Stone.WHITE))
     }
 }

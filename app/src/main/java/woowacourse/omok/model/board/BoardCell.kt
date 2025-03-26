@@ -1,11 +1,21 @@
 package woowacourse.omok.model.board
 
 import woowacourse.omok.model.Stone
+import woowacourse.omok.model.board.BoardCellState.Empty
+import woowacourse.omok.model.board.BoardCellState.Exist
 import woowacourse.omok.model.position.Position
 
 data class BoardCell(
     val position: Position,
-    val state: BoardCellState = BoardCellState.Empty,
+    val state: BoardCellState = Empty,
 ) {
-    fun replace(stone: Stone): BoardCell = copy(state = state.replace(stone))
+    fun replace(stone: Stone): BoardCell = copy(state = updateState(stone))
+
+    private fun updateState(stone: Stone): BoardCellState {
+        check(state is Empty) { "이미 돌이 있습니다." }
+        return when (stone) {
+            Stone.BLACK -> Exist(Stone.BLACK)
+            Stone.WHITE -> Exist(Stone.WHITE)
+        }
+    }
 }

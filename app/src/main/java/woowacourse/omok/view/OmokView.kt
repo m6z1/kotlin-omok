@@ -87,8 +87,11 @@ class OmokView {
                 }
             }
 
-            BoardCellState.Exist.Black -> "●"
-            BoardCellState.Exist.White -> "○"
+            is BoardCellState.Exist ->
+                when (state.stone) {
+                    Stone.BLACK -> "●"
+                    Stone.WHITE -> "○"
+                }
         }
 
     private fun cellDivider(

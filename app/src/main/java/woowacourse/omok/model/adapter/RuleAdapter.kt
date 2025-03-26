@@ -52,11 +52,13 @@ object RuleAdapter {
     private fun Board.toMatrix(): List<List<Int>> =
         List(sideLength.value) { column ->
             List(sideLength.value) { row ->
-                val state = getBoardCellState(row, column)
-                when (state) {
+                when (val state: BoardCellState = getBoardCellState(row, column)) {
                     BoardCellState.Empty -> 0
-                    BoardCellState.Exist.Black -> 1
-                    BoardCellState.Exist.White -> 2
+                    is BoardCellState.Exist ->
+                        when (state.stone) {
+                            Stone.BLACK -> 1
+                            Stone.WHITE -> 2
+                        }
                 }
             }
         }
