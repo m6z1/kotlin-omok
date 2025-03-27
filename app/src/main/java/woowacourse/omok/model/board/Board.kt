@@ -1,6 +1,8 @@
 package woowacourse.omok.model.board
 
 import woowacourse.omok.model.Stone
+import woowacourse.omok.model.adapter.RuleAdapter
+import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.GridElement
 import woowacourse.omok.model.position.Position
 
@@ -12,6 +14,15 @@ class Board(
         private set
 
     constructor(position: BoardCell) : this(setOf(position))
+
+    fun getPutState(
+        position: Position,
+        stone: Stone,
+    ): PutState {
+        if (!getBoardCell(position).isEmpty()) return PutState.ExistStone
+        if (!RuleAdapter.canPut(this, position, stone)) return PutState.ForbiddenStone
+        return PutState.CanPutStone
+    }
 
     fun put(
         position: Position,

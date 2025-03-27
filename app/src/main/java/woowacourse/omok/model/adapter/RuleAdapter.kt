@@ -13,6 +13,26 @@ import woowacourse.omok.model.rule.ThreeThreeRule
 import woowacourse.omok.model.rule.WhiteWinRule
 
 object RuleAdapter {
+    fun canPut(
+        board: Board,
+        position: Position,
+        stone: Stone,
+    ): Boolean {
+        val adaptedBoard: List<List<Int>> = board.toMatrix()
+        val adaptedPosition: Pair<Int, Int> = position.toCoordinates()
+        return when (stone) {
+            Stone.BLACK ->
+                when {
+                    BlackWinRule.validated(adaptedBoard, adaptedPosition) -> true
+                    FourFourRule.validated(adaptedBoard, adaptedPosition) -> false
+                    ThreeThreeRule.validated(adaptedBoard, adaptedPosition) -> false
+                    else -> true
+                }
+
+            Stone.WHITE -> true
+        }
+    }
+
     fun getState(
         board: Board,
         position: Position,

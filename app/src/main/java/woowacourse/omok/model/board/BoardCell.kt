@@ -11,11 +11,11 @@ data class BoardCell(
 ) {
     fun replace(stone: Stone): BoardCell = copy(state = updateState(stone))
 
-    private fun updateState(stone: Stone): BoardCellState {
-        check(state is Empty) { "이미 돌이 있습니다." }
-        return when (stone) {
+    private fun updateState(stone: Stone): BoardCellState =
+        when (stone) {
             Stone.BLACK -> Exist(Stone.BLACK)
             Stone.WHITE -> Exist(Stone.WHITE)
         }
-    }
+
+    fun isEmpty(): Boolean = state is Empty
 }

@@ -3,6 +3,7 @@ package woowacourse.omok.model
 import woowacourse.omok.model.board.Board
 import woowacourse.omok.model.gameState.BlackTurn
 import woowacourse.omok.model.gameState.GameState
+import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.Position
 
 class OmokGame(
@@ -15,11 +16,18 @@ class OmokGame(
     var lastTurn: GameState.Playing = BlackTurn
         private set
 
-    fun getTurnState(position: Position): GameState {
+    fun getTurnState(position: Position): PutState {
         lastTurn = currentTurn as GameState.Playing
-        currentTurn = lastTurn.play(board, position)
-        updateLastPosition(position, lastTurn)
-        return currentTurn
+
+        return when (board.getPutState(position, lastTurn.stone)) {
+            PutState.ExistStone -> PutState.ExistStone
+            PutState.ForbiddenStone -> PutState.ForbiddenStone
+            PutState.CanPutStone -> {
+                currentTurn = lastTurn.play(board, position)
+                updateLastPosition(position, lastTurn)
+                PutState.CanPutStone
+            }
+        }
     }
 
     private fun updateLastPosition(

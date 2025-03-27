@@ -13,6 +13,7 @@ import androidx.core.view.children
 import woowacourse.omok.model.OmokGame
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.board.Board
+import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.Position
 
 class MainActivity : AppCompatActivity() {
@@ -52,11 +53,24 @@ class MainActivity : AppCompatActivity() {
         if (!omokGame.isPlaying()) return
 
         val position = Position(row, column)
-        omokGame.getTurnState(position)
+        when (omokGame.getTurnState(position)) {
+            PutState.ExistStone ->
+                return Toast
+                    .makeText(
+                        this,
+                        "해당 위치에는 돌이 있습니다.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
 
-        if (omokGame.forbiddenPosition()) {
-            Toast.makeText(this, "해당 위치는 금수입니다.", Toast.LENGTH_SHORT).show()
-            return
+            PutState.ForbiddenStone ->
+                return Toast
+                    .makeText(
+                        this,
+                        "해당 위치는 금수입니다.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
+            PutState.CanPutStone -> Unit
         }
 
         when (omokGame.lastTurn.stone) {
