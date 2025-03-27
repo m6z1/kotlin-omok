@@ -54,37 +54,27 @@ class MainActivity : AppCompatActivity() {
 
         val position = Position(row, column)
         when (omokGame.getTurnState(position)) {
-            PutState.ExistStone ->
-                return Toast
-                    .makeText(
-                        this,
-                        "해당 위치에는 돌이 있습니다.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-
-            PutState.ForbiddenStone ->
-                return Toast
-                    .makeText(
-                        this,
-                        "해당 위치는 금수입니다.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-
+            PutState.ExistStone -> return showToast("해당 위치에는 돌이 있습니다.")
+            PutState.ForbiddenStone -> return showToast("해당 위치는 금수입니다.")
             PutState.CanPutStone -> Unit
         }
 
-        when (omokGame.lastTurn.stone) {
-            Stone.BLACK -> view.setImageResource(R.drawable.black_stone)
-            Stone.WHITE -> view.setImageResource(R.drawable.white_stone)
-        }
+        setStoneImageToBoard(view)
+        checkWinner()
+    }
 
+    private fun checkWinner() {
         if (!omokGame.isPlaying()) {
-            Toast
-                .makeText(
-                    this,
-                    "${omokGame.lastTurn.stone.toUIModel()}돌이 이겼습니다.",
-                    Toast.LENGTH_SHORT,
-                ).show()
+            showToast("${omokGame.lastTurn.stone.toUIModel()}돌이 이겼습니다.")
+        }
+    }
+
+    private fun showToast(message: String) = Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+
+    private fun setStoneImageToBoard(boardCell: ImageView) {
+        when (omokGame.lastTurn.stone) {
+            Stone.BLACK -> boardCell.setImageResource(R.drawable.black_stone)
+            Stone.WHITE -> boardCell.setImageResource(R.drawable.white_stone)
         }
     }
 
