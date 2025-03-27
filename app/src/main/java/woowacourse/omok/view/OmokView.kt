@@ -22,6 +22,10 @@ class OmokView {
         return readln().trim().uppercase().toPosition(boundary)
     }
 
+    fun notifyExistStone() {
+        println("해당 위치에는 돌이 있습니다.")
+    }
+
     fun notifyForbiddenPosition() {
         println("해당 위치는 금수입니다.")
     }

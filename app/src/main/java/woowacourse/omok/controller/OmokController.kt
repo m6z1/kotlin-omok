@@ -3,6 +3,7 @@ package woowacourse.omok.controller
 import woowacourse.omok.model.OmokGame
 import woowacourse.omok.model.board.Board
 import woowacourse.omok.model.gameState.GameState
+import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.Position
 import woowacourse.omok.view.OmokView
 
@@ -13,13 +14,14 @@ class OmokController(
     fun run() {
         omokView.showStartMessage(omokGame.board)
 
-        while (omokGame.currentTurn is GameState.Playing) {
+        while (omokGame.isPlaying()) {
             val position: Position =
                 getPosition(omokGame.currentTurn, omokGame.board, omokGame.lastPosition)
-            val currentState: GameState = omokGame.getTurnState(position)
-
-            if (omokGame.forbiddenPosition(currentState)) {
-                omokView.notifyForbiddenPosition()
+            val putState: PutState = omokGame.getTurnState(position)
+            when (putState) {
+                PutState.ExistStone -> omokView.notifyExistStone()
+                PutState.ForbiddenStone -> omokView.notifyForbiddenPosition()
+                PutState.CanPutStone -> Unit
             }
             omokView.showBoard(omokGame.board)
         }

@@ -42,9 +42,5 @@ class OmokGame(
         lastTurn: GameState.Playing?,
     ): Boolean = currentTurn == lastTurn
 
-    fun forbiddenPosition(currentTurn: GameState): Boolean = forbiddenPosition(currentTurn, this.currentTurn as? GameState.Playing)
-
-    fun forbiddenPosition(): Boolean = forbiddenPosition(currentTurn, lastTurn)
-
     fun isPlaying(): Boolean = currentTurn is GameState.Playing
 }
