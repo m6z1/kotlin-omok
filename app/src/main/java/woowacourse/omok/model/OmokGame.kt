@@ -12,9 +12,11 @@ class OmokGame(
         private set
     var lastPosition: Position? = null
         private set
+    var lastTurn: GameState.Playing = BlackTurn
+        private set
 
     fun getTurnState(position: Position): GameState {
-        val lastTurn: GameState.Playing = currentTurn as GameState.Playing
+        lastTurn = currentTurn as GameState.Playing
         currentTurn = lastTurn.play(board, position)
         updateLastPosition(position, lastTurn)
         return currentTurn
@@ -33,4 +35,8 @@ class OmokGame(
     ): Boolean = currentTurn == lastTurn
 
     fun forbiddenPosition(currentTurn: GameState): Boolean = forbiddenPosition(currentTurn, this.currentTurn as? GameState.Playing)
+
+    fun forbiddenPosition(): Boolean = forbiddenPosition(currentTurn, lastTurn)
+
+    fun isPlaying(): Boolean = currentTurn is GameState.Playing
 }
