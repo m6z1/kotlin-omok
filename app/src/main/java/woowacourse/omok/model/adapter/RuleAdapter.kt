@@ -3,9 +3,7 @@ package woowacourse.omok.model.adapter
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.board.Board
 import woowacourse.omok.model.board.BoardCellState
-import woowacourse.omok.model.gameState.BlackTurn
 import woowacourse.omok.model.gameState.GameState
-import woowacourse.omok.model.gameState.WhiteTurn
 import woowacourse.omok.model.position.Position
 import woowacourse.omok.model.rule.BlackWinRule
 import woowacourse.omok.model.rule.FourFourRule
@@ -49,12 +47,14 @@ object RuleAdapter {
     ): GameState {
         val adaptedBoard: List<List<Int>> = board.toMatrix()
         val adaptedPosition: Pair<Int, Int> = position.toCoordinates()
-        return when {
-            BlackWinRule.validated(adaptedBoard, adaptedPosition) -> GameState.Finish(Stone.BLACK)
-            FourFourRule.validated(adaptedBoard, adaptedPosition) -> BlackTurn
-            ThreeThreeRule.validated(adaptedBoard, adaptedPosition) -> BlackTurn
-            else -> WhiteTurn
+        if (BlackWinRule.validated(
+                adaptedBoard,
+                adaptedPosition,
+            )
+        ) {
+            return GameState.Finish(Stone.BLACK)
         }
+        return GameState.Turn(Stone.WHITE)
     }
 
     private fun getWhiteStoneState(
@@ -66,7 +66,7 @@ object RuleAdapter {
         if (WhiteWinRule.validated(adaptedBoard, adaptedPosition)) {
             return GameState.Finish(Stone.WHITE)
         }
-        return BlackTurn
+        return GameState.Turn(Stone.BLACK)
     }
 
     private fun Board.toMatrix(): List<List<Int>> =

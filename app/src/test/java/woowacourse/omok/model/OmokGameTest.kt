@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import woowacourse.omok.model.board.Board
-import woowacourse.omok.model.gameState.BlackTurn
+import woowacourse.omok.model.gameState.GameState
 import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.Position
 import woowacourse.omok.model.testDouble.BLACK_EXIST_STONE_IF_PUT_1_3
@@ -23,7 +23,7 @@ class OmokGameTest {
 
     @Test
     fun `첫 턴은 흑돌턴이다`() {
-        assertThat(omokGame.currentTurn).isEqualTo(BlackTurn)
+        assertThat(omokGame.currentTurn).isEqualTo(GameState.Turn(Stone.BLACK))
     }
 
     @Test

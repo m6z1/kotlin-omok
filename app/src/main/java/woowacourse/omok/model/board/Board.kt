@@ -2,6 +2,7 @@ package woowacourse.omok.model.board
 
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.adapter.RuleAdapter
+import woowacourse.omok.model.gameState.GameState
 import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.GridElement
 import woowacourse.omok.model.position.Position
@@ -27,19 +28,18 @@ class Board(
     fun put(
         position: Position,
         stone: Stone,
-    ) {
+    ): GameState {
         val targetPosition: BoardCell = getBoardCell(position)
         positions -= targetPosition
         positions += targetPosition.replace(stone)
+        return RuleAdapter.getState(this, position, stone)
     }
 
     fun put(
         row: Int,
         column: Int,
         stone: Stone,
-    ) {
-        put(Position(row, column), stone)
-    }
+    ): GameState = put(Position(row, column), stone)
 
     fun getBoardCellState(position: Position): BoardCellState = getBoardCell(position).state
 

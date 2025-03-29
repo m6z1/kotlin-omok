@@ -34,9 +34,8 @@ class BoardTest {
     @Test
     fun `원하는 위치에 돌을 둘 수 있다`() {
         // given:
-        val position: Position = Position(1, 2)
-        val boardCell: BoardCell = BoardCell(position)
-        val board: Board = Board(boardCell)
+        val position = Position(1, 2)
+        val board = Board()
 
         // when:
         board.put(position, Stone.WHITE)
