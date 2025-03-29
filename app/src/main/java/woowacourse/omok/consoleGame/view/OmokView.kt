@@ -1,4 +1,4 @@
-package woowacourse.omok.view
+package woowacourse.omok.consoleGame.view
 
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.board.Board

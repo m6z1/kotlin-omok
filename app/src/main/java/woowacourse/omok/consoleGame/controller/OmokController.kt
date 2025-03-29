@@ -1,11 +1,11 @@
-package woowacourse.omok.controller
+package woowacourse.omok.consoleGame.controller
 
+import woowacourse.omok.consoleGame.view.OmokView
 import woowacourse.omok.model.OmokGame
 import woowacourse.omok.model.board.Board
 import woowacourse.omok.model.gameState.GameState
 import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.Position
-import woowacourse.omok.view.OmokView
 
 class OmokController(
     private val omokView: OmokView,

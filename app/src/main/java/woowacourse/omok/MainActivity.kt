@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
-import woowacourse.omok.data.DbController
-import woowacourse.omok.data.DbHelper
+import woowacourse.omok.data.OmokDbController
+import woowacourse.omok.data.OmokDbHelper
 import woowacourse.omok.model.OmokGame
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.board.Board
@@ -21,8 +21,8 @@ import woowacourse.omok.model.position.Position
 class MainActivity : AppCompatActivity() {
     private val board by lazy { Board() }
     private val omokGame by lazy { OmokGame(board) }
-    private val dbHelper by lazy { DbHelper(this) }
-    private val dbController by lazy { DbController(dbHelper) }
+    private val omokDbHelper by lazy { OmokDbHelper(this) }
+    private val omokDbController by lazy { OmokDbController(omokDbHelper) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadBoard() {
-        val boardCells: List<Pair<String, String>> = dbController.getAllBoardCells()
+        val boardCells: List<Pair<String, String>> = omokDbController.getAllBoardCells()
 
         boardCells.forEach { (cellPosition, stone) ->
             val (row, col) = cellPosition.toPosition()
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setLastTurn() {
-        val lastStone: Stone = dbController.getLastStone()?.toStone() ?: return
+        val lastStone: Stone = omokDbController.getLastStone()?.toStone() ?: return
         omokGame.setTurn(lastStone)
     }
 
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         val stone: Stone = omokGame.lastTurn.stone
         boardCell.setImageResource(stone.toDrawable())
 
-        dbController.insertBoardCell(
+        omokDbController.insertBoardCell(
             position = boardCell.getTag(R.id.cellKey).toString(),
             stone = stone.toUIModel(),
         )
@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        dbHelper.close()
+        omokDbHelper.close()
         super.onDestroy()
     }
 }

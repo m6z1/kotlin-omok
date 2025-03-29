@@ -2,14 +2,12 @@ package woowacourse.omok.data
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
-import woowacourse.omok.data.OmokContract.COLUMN_NAME_POSITION
-import woowacourse.omok.data.OmokContract.COLUMN_NAME_STONE
 
-class DbController(
-    dbHelper: DbHelper,
+class OmokDbController(
+    omokDbHelper: OmokDbHelper,
 ) {
-    private val writableDb: SQLiteDatabase = dbHelper.writableDatabase
-    private val readableDb: SQLiteDatabase = dbHelper.readableDatabase
+    private val writableDb: SQLiteDatabase = omokDbHelper.writableDatabase
+    private val readableDb: SQLiteDatabase = omokDbHelper.readableDatabase
 
     fun insertBoardCell(
         position: String,
@@ -19,14 +17,14 @@ class DbController(
         values.put(COLUMN_NAME_POSITION, position)
         values.put(COLUMN_NAME_STONE, stone)
 
-        writableDb.insert(OmokContract.TABLE_NAME, null, values)
+        writableDb.insert(TABLE_NAME, null, values)
     }
 
     fun getAllBoardCells(): List<Pair<String, String>> {
         val columns = arrayOf(COLUMN_NAME_POSITION, COLUMN_NAME_STONE)
         val cursor =
             readableDb.query(
-                OmokContract.TABLE_NAME,
+                TABLE_NAME,
                 columns,
                 null,
                 null,
@@ -49,7 +47,7 @@ class DbController(
         val columns = arrayOf(COLUMN_NAME_STONE)
         val cursor =
             readableDb.query(
-                OmokContract.TABLE_NAME,
+                TABLE_NAME,
                 columns,
                 null,
                 null,
@@ -64,5 +62,11 @@ class DbController(
         } else {
             null
         }.also { cursor.close() }
+    }
+
+    companion object {
+        const val TABLE_NAME = "omok"
+        const val COLUMN_NAME_POSITION = "position"
+        const val COLUMN_NAME_STONE = "stone"
     }
 }

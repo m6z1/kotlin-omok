@@ -1,9 +1,9 @@
-package woowacourse.omok
+package woowacourse.omok.consoleGame
 
-import woowacourse.omok.controller.OmokController
+import woowacourse.omok.consoleGame.controller.OmokController
+import woowacourse.omok.consoleGame.view.OmokView
 import woowacourse.omok.model.OmokGame
 import woowacourse.omok.model.board.Board
-import woowacourse.omok.view.OmokView
 
 fun main() {
     val omokView = OmokView()
