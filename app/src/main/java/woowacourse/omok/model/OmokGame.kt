@@ -4,6 +4,7 @@ import woowacourse.omok.model.board.Board
 import woowacourse.omok.model.gameState.BlackTurn
 import woowacourse.omok.model.gameState.GameState
 import woowacourse.omok.model.gameState.PutState
+import woowacourse.omok.model.gameState.WhiteTurn
 import woowacourse.omok.model.position.Position
 
 class OmokGame(
@@ -15,6 +16,15 @@ class OmokGame(
         private set
     var lastTurn: GameState.Playing = BlackTurn
         private set
+
+    fun setTurn(lastTurnStone: Stone) {
+        lastTurn =
+            when (lastTurnStone) {
+                Stone.BLACK -> WhiteTurn
+                Stone.WHITE -> BlackTurn
+            }
+        currentTurn = lastTurn
+    }
 
     fun getTurnState(position: Position): PutState {
         lastTurn = currentTurn as GameState.Playing
