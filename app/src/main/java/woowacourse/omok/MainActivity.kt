@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
         val position: Position = view.getTag(R.id.cellKey).toString().toPosition()
 
-        when (omokGame.getTurnState(position)) {
+        when (omokGame.checkPutState(position)) {
             PutState.ExistStone -> showToast("해당 위치에는 돌이 있습니다.")
             PutState.ForbiddenStone -> showToast("해당 위치는 금수입니다.")
             PutState.CanPutStone -> {
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
         val stone: Stone = omokGame.lastTurn.stone
         boardCell.setImageResource(stone.toDrawable())
 
-        dbController.updateBoardCell(
+        dbController.insertBoardCell(
             position = boardCell.getTag(R.id.cellKey).toString(),
             stone = stone.toUIModel(),
         )

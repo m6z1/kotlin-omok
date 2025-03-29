@@ -11,7 +11,7 @@ class DbController(
     private val writableDb: SQLiteDatabase = dbHelper.writableDatabase
     private val readableDb: SQLiteDatabase = dbHelper.readableDatabase
 
-    fun updateBoardCell(
+    fun insertBoardCell(
         position: String,
         stone: String,
     ) {

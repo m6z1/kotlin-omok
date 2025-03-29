@@ -17,7 +17,7 @@ class OmokController(
         while (omokGame.isPlaying()) {
             val position: Position =
                 getPosition(omokGame.currentTurn, omokGame.board, omokGame.lastPosition)
-            val putState: PutState = omokGame.getTurnState(position)
+            val putState: PutState = omokGame.checkPutState(position)
             when (putState) {
                 PutState.ExistStone -> omokView.notifyExistStone()
                 PutState.ForbiddenStone -> omokView.notifyForbiddenPosition()

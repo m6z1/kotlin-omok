@@ -7,7 +7,7 @@ object OmokContract {
 
     const val COLUMN_NAME_POSITION = "position"
     const val COLUMN_NAME_STONE = "stone"
-    const val COLUMN_NAME_ID = BaseColumns._ID
+    private const val COLUMN_NAME_ID = BaseColumns._ID
 
     const val SQL_CREATE_ENTRIES =
         "CREATE TABLE $TABLE_NAME (" +

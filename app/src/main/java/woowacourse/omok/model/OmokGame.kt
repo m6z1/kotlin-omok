@@ -26,12 +26,11 @@ class OmokGame(
         currentTurn = lastTurn
     }
 
-    fun getTurnState(position: Position): PutState {
+    fun checkPutState(position: Position): PutState {
         lastTurn = currentTurn as GameState.Playing
 
-        return when (board.getPutState(position, lastTurn.stone)) {
-            PutState.ExistStone -> PutState.ExistStone
-            PutState.ForbiddenStone -> PutState.ForbiddenStone
+        return when (val putState = board.getPutState(position, lastTurn.stone)) {
+            PutState.ExistStone, PutState.ForbiddenStone -> putState
             PutState.CanPutStone -> {
                 currentTurn = lastTurn.play(board, position)
                 updateLastPosition(position, lastTurn)
