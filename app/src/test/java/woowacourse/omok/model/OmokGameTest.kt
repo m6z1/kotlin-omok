@@ -23,7 +23,7 @@ class OmokGameTest {
 
     @Test
     fun `첫 턴은 흑돌턴이다`() {
-        assertThat(omokGame.currentTurn).isEqualTo(GameState.Turn(Stone.BLACK))
+        assertThat(omokGame.currentPlaying).isEqualTo(GameState.Playing(Stone.BLACK))
     }
 
     @Test

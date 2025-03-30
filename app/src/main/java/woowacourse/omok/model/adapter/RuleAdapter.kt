@@ -54,7 +54,7 @@ object RuleAdapter {
         ) {
             return GameState.Finish(Stone.BLACK)
         }
-        return GameState.Turn(Stone.WHITE)
+        return GameState.Playing(Stone.WHITE)
     }
 
     private fun getWhiteStoneState(
@@ -66,7 +66,7 @@ object RuleAdapter {
         if (WhiteWinRule.validated(adaptedBoard, adaptedPosition)) {
             return GameState.Finish(Stone.WHITE)
         }
-        return GameState.Turn(Stone.BLACK)
+        return GameState.Playing(Stone.BLACK)
     }
 
     private fun Board.toMatrix(): List<List<Int>> =

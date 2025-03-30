@@ -5,7 +5,7 @@ import woowacourse.omok.model.Stone
 interface GameState {
     val stone: Stone
 
-    data class Turn(
+    data class Playing(
         override val stone: Stone,
     ) : GameState
 

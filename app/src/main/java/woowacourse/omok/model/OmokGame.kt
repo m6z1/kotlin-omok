@@ -8,30 +8,30 @@ import woowacourse.omok.model.position.Position
 class OmokGame(
     val board: Board,
 ) {
-    var currentTurn: GameState = GameState.Turn(Stone.BLACK)
+    var currentPlaying: GameState = GameState.Playing(Stone.BLACK)
         private set
     var lastPosition: Position? = null
         private set
-    var lastTurn: GameState.Turn = GameState.Turn(Stone.BLACK)
+    var lastPlaying: GameState.Playing = GameState.Playing(Stone.BLACK)
         private set
 
     fun setTurn(lastTurnStone: Stone) {
-        lastTurn =
+        lastPlaying =
             when (lastTurnStone) {
-                Stone.BLACK -> GameState.Turn(Stone.WHITE)
-                Stone.WHITE -> GameState.Turn(Stone.BLACK)
+                Stone.BLACK -> GameState.Playing(Stone.WHITE)
+                Stone.WHITE -> GameState.Playing(Stone.BLACK)
             }
-        currentTurn = lastTurn
+        currentPlaying = lastPlaying
     }
 
     fun checkPutState(position: Position): PutState {
-        lastTurn = currentTurn as GameState.Turn
+        lastPlaying = currentPlaying as GameState.Playing
 
-        return when (val putState = board.getPutState(position, lastTurn.stone)) {
+        return when (val putState = board.getPutState(position, lastPlaying.stone)) {
             PutState.ExistStone, PutState.ForbiddenStone -> putState
             PutState.CanPutStone -> {
-                currentTurn = board.put(position, lastTurn.stone)
-                updateLastPosition(position, lastTurn)
+                currentPlaying = board.put(position, lastPlaying.stone)
+                updateLastPosition(position, lastPlaying)
                 PutState.CanPutStone
             }
         }
@@ -39,15 +39,16 @@ class OmokGame(
 
     private fun updateLastPosition(
         position: Position,
-        lastTurn: GameState.Turn,
+        lastPlaying: GameState.Playing,
     ) {
-        lastPosition = if (forbiddenPosition(currentTurn, lastTurn)) lastPosition else position
+        lastPosition =
+            if (forbiddenPosition(currentPlaying, lastPlaying)) lastPosition else position
     }
 
     private fun forbiddenPosition(
         currentTurn: GameState,
-        lastTurn: GameState.Turn?,
-    ): Boolean = currentTurn == lastTurn
+        lastPlaying: GameState.Playing?,
+    ): Boolean = currentTurn == lastPlaying
 
-    fun isPlaying(): Boolean = currentTurn is GameState.Turn
+    fun isPlaying(): Boolean = currentPlaying is GameState.Playing
 }

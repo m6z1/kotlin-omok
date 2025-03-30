@@ -102,12 +102,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkWinner() {
         if (!omokGame.isPlaying()) {
-            showToast("${omokGame.lastTurn.stone.toUIModel()}돌이 이겼습니다.")
+            showToast("${omokGame.lastPlaying.stone.toUIModel()}돌이 이겼습니다.")
         }
     }
 
     private fun setStone(boardCell: ImageView) {
-        val stone: Stone = omokGame.lastTurn.stone
+        val stone: Stone = omokGame.lastPlaying.stone
         boardCell.setImageResource(stone.toDrawable())
 
         omokDbController.insertBoardCell(
