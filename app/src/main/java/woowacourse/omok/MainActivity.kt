@@ -86,16 +86,29 @@ class MainActivity : AppCompatActivity() {
         val position: Position = view.getTag(R.id.cellKey).toString().toPosition()
 
         when (omokGame.getPutState(position)) {
-            PutState.ExistStone -> showToast("해당 위치에는 돌이 있습니다.")
-            PutState.ForbiddenStone -> showToast("해당 위치는 금수입니다.")
-            PutState.CanPutStone -> {
-                val stone: Stone = omokGame.currentState.stone
-                omokGame.putStone(position)
-                setupStoneImage(view, stone)
-                updateBoardCellStone(view, stone)
-                checkWinner()
-            }
+            PutState.ExistStone -> handleExistStone()
+            PutState.ForbiddenStone -> handleForbiddenStone()
+            PutState.CanPutStone -> handleCanPutStone(view, position)
         }
+    }
+
+    private fun handleExistStone() {
+        showToast("해당 위치에는 돌이 있습니다.")
+    }
+
+    private fun handleForbiddenStone() {
+        showToast("해당 위치는 금수입니다.")
+    }
+
+    private fun handleCanPutStone(
+        view: ImageView,
+        position: Position,
+    ) {
+        val stone: Stone = omokGame.currentState.stone
+        omokGame.putStone(position)
+        setupStoneImage(view, stone)
+        updateBoardCellStone(view, stone)
+        checkWinner()
     }
 
     private fun checkWinner() {
