@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         when (omokGame.putStone(position)) {
             PutState.ExistStone -> handleExistStone()
             PutState.ForbiddenStone -> handleForbiddenStone()
+            PutState.GameOverCantPutStone -> handleGameOver()
             PutState.CanPutStone -> handleCanPutStone(view)
         }
     }
@@ -98,6 +99,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleForbiddenStone() {
         showToast("해당 위치는 금수입니다.")
+    }
+
+    private fun handleGameOver() {
+        showToast("게임이 끝났기에 더이상 돌을 둘 수 없습니다.")
     }
 
     private fun handleCanPutStone(view: ImageView) {

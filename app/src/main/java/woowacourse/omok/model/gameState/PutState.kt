@@ -4,4 +4,5 @@ enum class PutState {
     ExistStone,
     ForbiddenStone,
     CanPutStone,
+    GameOverCantPutStone,
 }

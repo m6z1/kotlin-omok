@@ -26,7 +26,7 @@ class OmokGame(
     }
 
     fun putStone(position: Position): PutState {
-        lastPlaying = currentState as GameState.Playing
+        lastPlaying = currentState as? GameState.Playing ?: return PutState.GameOverCantPutStone
         val putState = board.put(position, lastPlaying.stone)
 
         if (putState == PutState.CanPutStone) {

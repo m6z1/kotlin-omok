@@ -30,6 +30,10 @@ class OmokView {
         println("해당 위치는 금수입니다.")
     }
 
+    fun notifyGameOver() {
+        println("게임이 끝났기에 더이상 돌을 둘 수 없습니다.")
+    }
+
     fun showBoard(board: Board) {
         val boardToList: List<List<BoardCellState>> = getMatrix(board)
         val lastIndex = board.sideLength.value - 1

@@ -22,6 +22,7 @@ class OmokController(
                 PutState.ExistStone -> omokView.notifyExistStone()
                 PutState.ForbiddenStone -> omokView.notifyForbiddenPosition()
                 PutState.CanPutStone -> Unit
+                PutState.GameOverCantPutStone -> omokView.notifyGameOver()
             }
             omokView.showBoard(omokGame.board)
         }
