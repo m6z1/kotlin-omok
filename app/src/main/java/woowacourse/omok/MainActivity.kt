@@ -85,10 +85,10 @@ class MainActivity : AppCompatActivity() {
 
         val position: Position = view.getTag(R.id.cellKey).toString().toPosition()
 
-        when (omokGame.getPutState(position)) {
+        when (omokGame.putStone(position)) {
             PutState.ExistStone -> handleExistStone()
             PutState.ForbiddenStone -> handleForbiddenStone()
-            PutState.CanPutStone -> handleCanPutStone(view, position)
+            PutState.CanPutStone -> handleCanPutStone(view)
         }
     }
 
@@ -100,12 +100,8 @@ class MainActivity : AppCompatActivity() {
         showToast("해당 위치는 금수입니다.")
     }
 
-    private fun handleCanPutStone(
-        view: ImageView,
-        position: Position,
-    ) {
-        val stone: Stone = omokGame.currentState.stone
-        omokGame.putStone(position)
+    private fun handleCanPutStone(view: ImageView) {
+        val stone: Stone = omokGame.lastPlaying.stone
         setupStoneImage(view, stone)
         updateBoardCellStone(view, stone)
         checkWinner()
@@ -113,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkWinner() {
         if (!omokGame.isPlaying()) {
-            showToast("${omokGame.currentState.stone.toUIModel()}돌이 이겼습니다.")
+            showToast("${omokGame.lastPlaying.stone.toUIModel()}돌이 이겼습니다.")
         }
     }
 

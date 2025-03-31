@@ -1,5 +1,6 @@
 package woowacourse.omok.model
 
+import woowacourse.omok.model.adapter.RuleAdapter
 import woowacourse.omok.model.board.Board
 import woowacourse.omok.model.gameState.GameState
 import woowacourse.omok.model.gameState.PutState
@@ -24,14 +25,16 @@ class OmokGame(
         currentState = lastPlaying
     }
 
-    fun getPutState(position: Position): PutState {
+    fun putStone(position: Position): PutState {
         lastPlaying = currentState as GameState.Playing
-        return board.getPutState(position, lastPlaying.stone)
-    }
+        val putState = board.put(position, lastPlaying.stone)
 
-    fun putStone(position: Position) {
-        currentState = board.put(position, lastPlaying.stone)
-        updateLastPosition(position, lastPlaying)
+        if (putState == PutState.CanPutStone) {
+            currentState = RuleAdapter.getState(board, position, lastPlaying.stone)
+            updateLastPosition(position, lastPlaying)
+        }
+
+        return putState
     }
 
     private fun updateLastPosition(

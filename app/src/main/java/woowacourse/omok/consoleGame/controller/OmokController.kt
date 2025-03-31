@@ -17,15 +17,15 @@ class OmokController(
         while (omokGame.isPlaying()) {
             val position: Position =
                 getPosition(omokGame.currentState, omokGame.board, omokGame.lastPosition)
-            val putState: PutState = omokGame.getPutState(position)
+            val putState: PutState = omokGame.putStone(position)
             when (putState) {
                 PutState.ExistStone -> omokView.notifyExistStone()
                 PutState.ForbiddenStone -> omokView.notifyForbiddenPosition()
-                PutState.CanPutStone -> omokGame.putStone(position)
+                PutState.CanPutStone -> Unit
             }
             omokView.showBoard(omokGame.board)
         }
-        omokView.showWinner(omokGame.currentState.stone)
+        omokView.showWinner(omokGame.lastPlaying.stone)
     }
 
     private fun getPosition(
