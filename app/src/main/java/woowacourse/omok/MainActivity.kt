@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val omokGame by lazy { OmokGame(board) }
     private val omokDbHelper by lazy { OmokDbHelper(this) }
     private val omokDbController by lazy { OmokDbController(omokDbHelper) }
+    private val boardLayout = findViewById<TableLayout>(R.id.board)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +42,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBoard() {
-        val boardLayout = findViewById<TableLayout>(R.id.board)
-
         boardLayout.children
             .filterIsInstance<TableRow>()
             .forEachIndexed { colIndex, row ->
@@ -69,16 +68,14 @@ class MainActivity : AppCompatActivity() {
     private fun findBoardCell(
         row: Int,
         col: Int,
-    ): ImageView? {
-        val boardLayout = findViewById<TableLayout>(R.id.board)
-        return boardLayout
+    ): ImageView? =
+        boardLayout
             .children
             .filterIsInstance<TableRow>()
             .elementAtOrNull(col)
             ?.children
             ?.filterIsInstance<ImageView>()
             ?.elementAtOrNull(row)
-    }
 
     private fun setupLastTurn() {
         val lastStone: Stone = omokDbController.getLastStone()?.toStone() ?: return
