@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             val (row, col) = cellPosition.toPosition()
             board.put(cellPosition.toPosition(), stone.toStone())
 
-            findBoardCell(row.value, col.value)?.setImageResource(stone.toDrawable())
+            findBoardCell(row.value, col.value)?.setImageResource(stone.toStone().toDrawable())
         }
     }
 
@@ -125,13 +125,6 @@ class MainActivity : AppCompatActivity() {
         when (this) {
             Stone.BLACK -> "흑"
             Stone.WHITE -> "백"
-        }
-
-    private fun String.toDrawable(): Int =
-        when (this) {
-            "흑" -> R.drawable.black_stone
-            "백" -> R.drawable.white_stone
-            else -> 0
         }
 
     private fun Stone.toDrawable(): Int =
