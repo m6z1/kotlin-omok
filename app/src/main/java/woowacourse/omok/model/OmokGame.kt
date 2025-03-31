@@ -15,9 +15,9 @@ class OmokGame(
     var lastPlaying: GameState.Playing = GameState.Playing(Stone.BLACK)
         private set
 
-    fun setTurn(lastTurnStone: Stone) {
+    fun setTurn(previousStone: Stone) {
         lastPlaying =
-            when (lastTurnStone) {
+            when (previousStone) {
                 Stone.BLACK -> GameState.Playing(Stone.WHITE)
                 Stone.WHITE -> GameState.Playing(Stone.BLACK)
             }
