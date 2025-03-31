@@ -24,17 +24,14 @@ class OmokGame(
         currentState = lastPlaying
     }
 
-    fun checkPutState(position: Position): PutState {
+    fun getPutState(position: Position): PutState {
         lastPlaying = currentState as GameState.Playing
+        return board.getPutState(position, lastPlaying.stone)
+    }
 
-        return when (val putState = board.getPutState(position, lastPlaying.stone)) {
-            PutState.ExistStone, PutState.ForbiddenStone -> putState
-            PutState.CanPutStone -> {
-                currentState = board.put(position, lastPlaying.stone)
-                updateLastPosition(position, lastPlaying)
-                PutState.CanPutStone
-            }
-        }
+    fun putStone(position: Position) {
+        currentState = board.put(position, lastPlaying.stone)
+        updateLastPosition(position, lastPlaying)
     }
 
     private fun updateLastPosition(

@@ -34,7 +34,7 @@ class OmokGameTest {
         val omokGame = OmokGame(board)
         val position: Position = POSITION_1_5
 
-        val actual: PutState = omokGame.checkPutState(position)
+        val actual: PutState = omokGame.getPutState(position)
 
         assertThat(actual).isEqualTo(PutState.CanPutStone)
     }
@@ -42,7 +42,7 @@ class OmokGameTest {
     @Test
     fun `백돌턴 때 받은 포지션이 돌을 놓을 수 있는 경우 CanPut 을 반환한다`() {
         omokGame = OmokGame(WHITE_WIN_BOARD_IF_PUT_1_0)
-        val actual: PutState = omokGame.checkPutState(Position(8, 5))
+        val actual: PutState = omokGame.getPutState(Position(8, 5))
 
         assertThat(actual).isEqualTo(PutState.CanPutStone)
     }
@@ -50,7 +50,7 @@ class OmokGameTest {
     @Test
     fun `흑돌턴 때 받은 포지션이 금수일 경우 같은 ForbiddenStone 을 반환한다`() {
         omokGame = OmokGame(BLACK_FORBIDDEN_BOARD_IF_PUT_1_1)
-        val actual = omokGame.checkPutState(Position(1, 1))
+        val actual = omokGame.getPutState(Position(1, 1))
 
         assertThat(actual).isEqualTo(PutState.ForbiddenStone)
     }
@@ -61,7 +61,7 @@ class OmokGameTest {
         val omokGame = OmokGame(board)
         val position = Position(1, 3)
 
-        val actual: PutState = omokGame.checkPutState(position)
+        val actual: PutState = omokGame.getPutState(position)
 
         assertThat(actual).isEqualTo(PutState.ExistStone)
     }
