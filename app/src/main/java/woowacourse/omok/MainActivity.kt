@@ -94,7 +94,9 @@ class MainActivity : AppCompatActivity() {
             PutState.ExistStone -> showToast("해당 위치에는 돌이 있습니다.")
             PutState.ForbiddenStone -> showToast("해당 위치는 금수입니다.")
             PutState.CanPutStone -> {
-                setStone(view)
+                val stone: Stone = omokGame.lastPlaying.stone
+                setupStoneImage(view, stone)
+                updateBoardCellStone(view, stone)
                 checkWinner()
             }
         }
@@ -106,10 +108,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setStone(boardCell: ImageView) {
-        val stone: Stone = omokGame.lastPlaying.stone
+    private fun setupStoneImage(
+        boardCell: ImageView,
+        stone: Stone,
+    ) {
         boardCell.setImageResource(stone.toDrawable())
+    }
 
+    private fun updateBoardCellStone(
+        boardCell: ImageView,
+        stone: Stone,
+    ) {
         omokDbController.insertBoardCell(
             position = boardCell.getTag(R.id.cellKey).toString(),
             stone = stone.toUIModel(),
