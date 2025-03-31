@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         setupBoard()
         loadBoard()
-        setLastTurn()
+        setupLastTurn()
     }
 
     private fun setupBoard() {
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             ?.elementAtOrNull(row)
     }
 
-    private fun setLastTurn() {
+    private fun setupLastTurn() {
         val lastStone: Stone = omokDbController.getLastStone()?.toStone() ?: return
         omokGame.setTurn(lastStone)
     }
