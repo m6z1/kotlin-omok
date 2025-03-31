@@ -3,7 +3,7 @@ package woowacourse.omok.data
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 
-class OmokDbController(
+class OmokStorageController(
     omokDbHelper: OmokDbHelper,
 ) {
     private val writableDb: SQLiteDatabase = omokDbHelper.writableDatabase

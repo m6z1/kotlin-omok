@@ -4,9 +4,9 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
-import woowacourse.omok.data.OmokDbController.Companion.COLUMN_NAME_POSITION
-import woowacourse.omok.data.OmokDbController.Companion.COLUMN_NAME_STONE
-import woowacourse.omok.data.OmokDbController.Companion.TABLE_NAME
+import woowacourse.omok.data.OmokStorageController.Companion.COLUMN_NAME_POSITION
+import woowacourse.omok.data.OmokStorageController.Companion.COLUMN_NAME_STONE
+import woowacourse.omok.data.OmokStorageController.Companion.TABLE_NAME
 
 class OmokDbHelper(
     context: Context,

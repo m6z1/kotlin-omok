@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
-import woowacourse.omok.data.OmokDbController
 import woowacourse.omok.data.OmokDbHelper
+import woowacourse.omok.data.OmokStorageController
 import woowacourse.omok.model.OmokGame
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.board.Board
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val board by lazy { Board() }
     private val omokGame by lazy { OmokGame(board) }
     private val omokDbHelper by lazy { OmokDbHelper(this) }
-    private val omokDbController by lazy { OmokDbController(omokDbHelper) }
+    private val omokStorageController by lazy { OmokStorageController(omokDbHelper) }
     private val boardLayout by lazy { findViewById<TableLayout>(R.id.board) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadBoard() {
-        val boardCells: List<Pair<String, String>> = omokDbController.getAllBoardCells()
+        val boardCells: List<Pair<String, String>> = omokStorageController.getAllBoardCells()
 
         boardCells.forEach { (cellPosition, stone) ->
             val (row, col) = cellPosition.toPosition()
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             ?.elementAtOrNull(row)
 
     private fun setupLastTurn() {
-        val lastStone: Stone = omokDbController.getLastStone()?.toStone() ?: return
+        val lastStone: Stone = omokStorageController.getLastStone()?.toStone() ?: return
         omokGame.setTurn(lastStone)
     }
 
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         boardCell: ImageView,
         stone: Stone,
     ) {
-        omokDbController.insertBoardCell(
+        omokStorageController.insertBoardCell(
             position = boardCell.getTag(R.id.cellKey).toString(),
             stone = stone.toUIModel(),
         )
