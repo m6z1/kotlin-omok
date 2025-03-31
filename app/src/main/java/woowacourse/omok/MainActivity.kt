@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
-import woowacourse.omok.data.OmokDbHelper
 import woowacourse.omok.data.OmokStorageController
 import woowacourse.omok.model.OmokGame
 import woowacourse.omok.model.Stone
@@ -21,8 +20,7 @@ import woowacourse.omok.model.position.Position
 class MainActivity : AppCompatActivity() {
     private val board by lazy { Board() }
     private val omokGame by lazy { OmokGame(board) }
-    private val omokDbHelper by lazy { OmokDbHelper(this) }
-    private val omokStorageController by lazy { OmokStorageController(omokDbHelper) }
+    private val omokStorageController by lazy { OmokStorageController(this) }
     private val boardLayout by lazy { findViewById<TableLayout>(R.id.board) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -152,7 +150,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        omokDbHelper.close()
+        omokStorageController.close()
         super.onDestroy()
     }
 }

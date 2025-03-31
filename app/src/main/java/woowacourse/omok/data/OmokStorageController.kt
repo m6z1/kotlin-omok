@@ -1,13 +1,12 @@
 package woowacourse.omok.data
 
 import android.content.ContentValues
-import android.database.sqlite.SQLiteDatabase
+import android.content.Context
 
 class OmokStorageController(
-    omokDbHelper: OmokDbHelper,
+    context: Context,
 ) {
-    private val writableDb: SQLiteDatabase = omokDbHelper.writableDatabase
-    private val readableDb: SQLiteDatabase = omokDbHelper.readableDatabase
+    private val omokDbHelper = OmokDbHelper(context)
 
     fun insertBoardCell(
         position: String,
@@ -17,13 +16,13 @@ class OmokStorageController(
         values.put(COLUMN_NAME_POSITION, position)
         values.put(COLUMN_NAME_STONE, stone)
 
-        writableDb.insert(TABLE_NAME, null, values)
+        omokDbHelper.writableDatabase.insert(TABLE_NAME, null, values)
     }
 
     fun getAllBoardCells(): List<Pair<String, String>> {
         val columns = arrayOf(COLUMN_NAME_POSITION, COLUMN_NAME_STONE)
         val cursor =
-            readableDb.query(
+            omokDbHelper.readableDatabase.query(
                 TABLE_NAME,
                 columns,
                 null,
@@ -46,7 +45,7 @@ class OmokStorageController(
     fun getLastStone(): String? {
         val columns = arrayOf(COLUMN_NAME_STONE)
         val cursor =
-            readableDb.query(
+            omokDbHelper.readableDatabase.query(
                 TABLE_NAME,
                 columns,
                 null,
@@ -62,6 +61,10 @@ class OmokStorageController(
         } else {
             null
         }.also { cursor.close() }
+    }
+
+    fun close() {
+        omokDbHelper.close()
     }
 
     companion object {
