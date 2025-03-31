@@ -8,7 +8,7 @@ import woowacourse.omok.model.position.Position
 class OmokGame(
     val board: Board,
 ) {
-    var currentPlaying: GameState = GameState.Playing(Stone.BLACK)
+    var currentState: GameState = GameState.Playing(Stone.BLACK)
         private set
     var lastPosition: Position? = null
         private set
@@ -21,16 +21,16 @@ class OmokGame(
                 Stone.BLACK -> GameState.Playing(Stone.WHITE)
                 Stone.WHITE -> GameState.Playing(Stone.BLACK)
             }
-        currentPlaying = lastPlaying
+        currentState = lastPlaying
     }
 
     fun checkPutState(position: Position): PutState {
-        lastPlaying = currentPlaying as GameState.Playing
+        lastPlaying = currentState as GameState.Playing
 
         return when (val putState = board.getPutState(position, lastPlaying.stone)) {
             PutState.ExistStone, PutState.ForbiddenStone -> putState
             PutState.CanPutStone -> {
-                currentPlaying = board.put(position, lastPlaying.stone)
+                currentState = board.put(position, lastPlaying.stone)
                 updateLastPosition(position, lastPlaying)
                 PutState.CanPutStone
             }
@@ -42,7 +42,7 @@ class OmokGame(
         lastPlaying: GameState.Playing,
     ) {
         lastPosition =
-            if (forbiddenPosition(currentPlaying, lastPlaying)) lastPosition else position
+            if (forbiddenPosition(currentState, lastPlaying)) lastPosition else position
     }
 
     private fun forbiddenPosition(
@@ -50,5 +50,5 @@ class OmokGame(
         lastPlaying: GameState.Playing?,
     ): Boolean = currentTurn == lastPlaying
 
-    fun isPlaying(): Boolean = currentPlaying is GameState.Playing
+    fun isPlaying(): Boolean = currentState is GameState.Playing
 }

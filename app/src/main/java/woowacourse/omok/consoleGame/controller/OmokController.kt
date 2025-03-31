@@ -16,7 +16,7 @@ class OmokController(
 
         while (omokGame.isPlaying()) {
             val position: Position =
-                getPosition(omokGame.currentPlaying, omokGame.board, omokGame.lastPosition)
+                getPosition(omokGame.currentState, omokGame.board, omokGame.lastPosition)
             val putState: PutState = omokGame.checkPutState(position)
             when (putState) {
                 PutState.ExistStone -> omokView.notifyExistStone()
@@ -25,7 +25,7 @@ class OmokController(
             }
             omokView.showBoard(omokGame.board)
         }
-        omokView.showWinner(omokGame.currentPlaying.stone)
+        omokView.showWinner(omokGame.currentState.stone)
     }
 
     private fun getPosition(
