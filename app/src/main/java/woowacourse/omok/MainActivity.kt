@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
             PutState.ExistStone -> showToast("해당 위치에는 돌이 있습니다.")
             PutState.ForbiddenStone -> showToast("해당 위치는 금수입니다.")
             PutState.CanPutStone -> {
-                val stone: Stone = omokGame.lastPlaying.stone
+                val stone: Stone = omokGame.currentState.stone
                 omokGame.putStone(position)
                 setupStoneImage(view, stone)
                 updateBoardCellStone(view, stone)
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkWinner() {
         if (!omokGame.isPlaying()) {
-            showToast("${omokGame.lastPlaying.stone.toUIModel()}돌이 이겼습니다.")
+            showToast("${omokGame.currentState.stone.toUIModel()}돌이 이겼습니다.")
         }
     }
 
