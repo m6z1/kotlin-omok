@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val omokGame by lazy { OmokGame(board) }
     private val omokDbHelper by lazy { OmokDbHelper(this) }
     private val omokDbController by lazy { OmokDbController(omokDbHelper) }
-    private val boardLayout = findViewById<TableLayout>(R.id.board)
+    private val boardLayout by lazy { findViewById<TableLayout>(R.id.board) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
