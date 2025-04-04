@@ -2,7 +2,7 @@ package woowacourse.omok.consoleGame.view
 
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.board.Board
-import woowacourse.omok.model.board.BoardCellState
+import woowacourse.omok.model.board.BoardCell
 import woowacourse.omok.model.position.Position
 
 class OmokView {
@@ -35,11 +35,11 @@ class OmokView {
     }
 
     fun showBoard(board: Board) {
-        val boardToList: List<List<BoardCellState>> = getMatrix(board)
+        val boardToList: List<List<BoardCell>> = getMatrix(board)
         val lastIndex = board.sideLength.value - 1
         val boundary = board.sideLength.value
-        boardToList.forEachIndexed { columnIndex: Int, row: List<BoardCellState> ->
-            row.forEachIndexed { rowIndex: Int, state: BoardCellState ->
+        boardToList.forEachIndexed { columnIndex: Int, row: List<BoardCell> ->
+            row.forEachIndexed { rowIndex: Int, state: BoardCell ->
                 val wantToShow: String =
                     columnIndex(rowIndex, columnIndex, boundary) +
                         boardCellState(state, rowIndex, columnIndex, lastIndex) +
@@ -54,7 +54,7 @@ class OmokView {
     private fun getMatrix(board: Board) =
         List(board.sideLength.value) { column ->
             List(board.sideLength.value) { row ->
-                board.getBoardCellState(row, column)
+                board.getBoardCell(row, column)
             }
         }
 
@@ -75,13 +75,13 @@ class OmokView {
         }
 
     private fun boardCellState(
-        state: BoardCellState,
+        state: BoardCell,
         rowIndex: Int,
         columnIndex: Int,
         lastIndex: Int,
     ): String =
         when (state) {
-            BoardCellState.Empty -> {
+            is BoardCell.EmptyCell -> {
                 when {
                     rowIndex == 0 && columnIndex == 0 -> "┌"
                     rowIndex == 0 && columnIndex == lastIndex -> "└"
@@ -95,7 +95,7 @@ class OmokView {
                 }
             }
 
-            is BoardCellState.Exist ->
+            is BoardCell.ExistsCell ->
                 when (state.stone) {
                     Stone.BLACK -> "●"
                     Stone.WHITE -> "○"

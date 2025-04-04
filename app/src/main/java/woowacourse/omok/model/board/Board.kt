@@ -46,18 +46,16 @@ class Board(
         stone: Stone,
     ): PutState = put(Position(row, column), stone)
 
-    fun getBoardCellState(position: Position): BoardCellState = getBoardCell(position).state
-
-    fun getBoardCellState(
-        row: Int,
-        column: Int,
-    ): BoardCellState = getBoardCellState(Position(row, column))
-
-    private fun getBoardCell(position: Position): BoardCell =
+    fun getBoardCell(position: Position): BoardCell =
         positions
             .find { boardPosition ->
                 position == boardPosition.position
             } ?: throw IllegalArgumentException("$position 는 존재하지 않는 위치 입니다.")
+
+    fun getBoardCell(
+        row: Int,
+        column: Int,
+    ): BoardCell = getBoardCell(Position(row, column))
 
     companion object {
         operator fun invoke(sideLength: Int = 15): Board {
@@ -70,7 +68,7 @@ class Board(
                 .flatMap { row: Int ->
                     (0 until size).map { column: Int ->
                         val position = Position(row, column)
-                        BoardCell(position)
+                        BoardCell.EmptyCell(position)
                     }
                 }.toSet()
     }

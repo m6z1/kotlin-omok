@@ -2,7 +2,7 @@ package woowacourse.omok.model.adapter
 
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.board.Board
-import woowacourse.omok.model.board.BoardCellState
+import woowacourse.omok.model.board.BoardCell
 import woowacourse.omok.model.gameState.GameState
 import woowacourse.omok.model.position.Position
 import woowacourse.omok.model.rule.BlackWinRule
@@ -72,9 +72,9 @@ object RuleAdapter : RuleChecker {
     private fun Board.toMatrix(): List<List<Int>> =
         List(sideLength.value) { column ->
             List(sideLength.value) { row ->
-                when (val state: BoardCellState = getBoardCellState(row, column)) {
-                    BoardCellState.Empty -> 0
-                    is BoardCellState.Exist ->
+                when (val state: BoardCell = getBoardCell(row, column)) {
+                    is BoardCell.EmptyCell -> 0
+                    is BoardCell.ExistsCell ->
                         when (state.stone) {
                             Stone.BLACK -> 1
                             Stone.WHITE -> 2
