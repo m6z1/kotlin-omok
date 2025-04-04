@@ -24,10 +24,18 @@ class Board(
         if (!targetPosition.isEmpty()) return PutState.ExistStone
         if (!RuleAdapter.canPut(this, position, stone)) return PutState.ForbiddenStone
 
-        positions -= targetPosition
-        positions += targetPosition.replace(stone)
+        updateBoard(position, stone)
 
         return PutState.CanPutStone
+    }
+
+    private fun updateBoard(
+        targetPosition: Position,
+        stone: Stone,
+    ) {
+        val targetBoardCell = getBoardCell(targetPosition)
+        positions -= targetBoardCell
+        positions += targetBoardCell.replace(stone)
     }
 
     fun put(
