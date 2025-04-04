@@ -1,6 +1,8 @@
 package woowacourse.omok.data
 
+import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
@@ -31,6 +33,30 @@ class OmokDbHelper(
     ) {
         onUpgrade(db, oldVersion, newVersion)
     }
+
+    fun insert(
+        tableName: String,
+        values: ContentValues,
+    ) {
+        writableDatabase.insert(tableName, null, values)
+    }
+
+    fun load(
+        tableName: String,
+        columns: Array<String>,
+        orderBy: String?,
+        limit: String?,
+    ): Cursor =
+        readableDatabase.query(
+            tableName,
+            columns,
+            null,
+            null,
+            null,
+            null,
+            orderBy,
+            limit,
+        )
 
     companion object {
         private const val DATABASE_VERSION = 1

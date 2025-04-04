@@ -16,27 +16,18 @@ class OmokStorageController(
         values.put(COLUMN_NAME_POSITION, position)
         values.put(COLUMN_NAME_STONE, stone)
 
-        omokDbHelper.writableDatabase.insert(TABLE_NAME, null, values)
+        omokDbHelper.insert(TABLE_NAME, values)
     }
 
     fun getAllBoardCells(): List<Pair<String, String>> {
         val columns = arrayOf(COLUMN_NAME_POSITION, COLUMN_NAME_STONE)
-        val cursor =
-            omokDbHelper.readableDatabase.query(
-                TABLE_NAME,
-                columns,
-                null,
-                null,
-                null,
-                null,
-                null,
-            )
+        val cursor = omokDbHelper.load(TABLE_NAME, columns, null, null)
 
         val boardCells = mutableListOf<Pair<String, String>>()
         while (cursor.moveToNext()) {
-            val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_POSITION))
+            val position = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_POSITION))
             val stone = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_STONE))
-            boardCells.add(title to stone)
+            boardCells.add(position to stone)
         }
         cursor.close()
         return boardCells
@@ -44,17 +35,7 @@ class OmokStorageController(
 
     fun getLastStone(): String? {
         val columns = arrayOf(COLUMN_NAME_STONE)
-        val cursor =
-            omokDbHelper.readableDatabase.query(
-                TABLE_NAME,
-                columns,
-                null,
-                null,
-                null,
-                null,
-                "rowid DESC",
-                "1",
-            )
+        val cursor = omokDbHelper.load(TABLE_NAME, columns, "rowid DESC", "1")
 
         return if (cursor.moveToFirst()) {
             cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME_STONE))
