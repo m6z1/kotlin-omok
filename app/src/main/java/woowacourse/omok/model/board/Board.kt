@@ -2,6 +2,7 @@ package woowacourse.omok.model.board
 
 import woowacourse.omok.model.Stone
 import woowacourse.omok.model.adapter.RuleAdapter
+import woowacourse.omok.model.adapter.RuleChecker
 import woowacourse.omok.model.gameState.PutState
 import woowacourse.omok.model.position.GridElement
 import woowacourse.omok.model.position.Position
@@ -9,6 +10,7 @@ import woowacourse.omok.model.position.Position
 class Board(
     positions: Set<BoardCell>,
     val sideLength: GridElement = GridElement(15),
+    private val ruleChecker: RuleChecker = RuleAdapter,
 ) {
     var positions: Set<BoardCell> = positions.toSet()
         private set
@@ -22,7 +24,7 @@ class Board(
         val targetPosition: BoardCell = getBoardCell(position)
 
         if (!targetPosition.isEmpty()) return PutState.ExistStone
-        if (!RuleAdapter.canPut(this, position, stone)) return PutState.ForbiddenStone
+        if (!ruleChecker.canPut(this, position, stone)) return PutState.ForbiddenStone
 
         updateBoard(position, stone)
 

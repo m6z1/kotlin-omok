@@ -10,8 +10,8 @@ import woowacourse.omok.model.rule.FourFourRule
 import woowacourse.omok.model.rule.ThreeThreeRule
 import woowacourse.omok.model.rule.WhiteWinRule
 
-object RuleAdapter {
-    fun canPut(
+object RuleAdapter : RuleChecker {
+    override fun canPut(
         board: Board,
         position: Position,
         stone: Stone,
@@ -31,7 +31,7 @@ object RuleAdapter {
         }
     }
 
-    fun getState(
+    override fun getState(
         board: Board,
         position: Position,
         stone: Stone,
