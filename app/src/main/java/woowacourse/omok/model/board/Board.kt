@@ -57,6 +57,8 @@ class Board(
         column: Int,
     ): BoardCell = getBoardCell(Position(row, column))
 
+    fun isFull(): Boolean = positions.all { !it.isEmpty() }
+
     companion object {
         operator fun invoke(sideLength: Int = 15): Board {
             val defaultPositions: Set<BoardCell> = defaultPositions(sideLength)

@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun playTurn(view: ImageView) {
-        if (!omokGame.isPlaying()) return
+        if (!omokGame.isPlaying() || omokGame.isDraw()) return
 
         val position: Position = view.getTag(R.id.cellKey).toString().toPosition()
 
@@ -113,7 +113,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkWinner() {
-        if (!omokGame.isPlaying()) {
+        if (!omokGame.isDraw()) {
+            showToast("돌이 둘 곳이 없으므로 무승부 입니다.")
+            return
+        }
+        if (!omokGame.isPlaying() && !omokGame.isDraw()) {
             showToast("${omokGame.lastPlaying.stone.toUIModel()}돌이 이겼습니다.")
         }
     }

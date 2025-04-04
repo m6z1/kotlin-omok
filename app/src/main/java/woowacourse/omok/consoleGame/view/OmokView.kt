@@ -112,6 +112,10 @@ class OmokView {
         return range.joinToString(separator = "  ", prefix = "    ")
     }
 
+    fun showDraw() {
+        println("돌이 둘 곳이 없으므로 무승부 입니다.")
+    }
+
     fun showWinner(winner: Stone) {
         println("${winner.toUIModel()}돌이 이겼습니다.")
     }

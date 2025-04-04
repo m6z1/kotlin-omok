@@ -51,4 +51,6 @@ class OmokGame(
     ): Boolean = currentTurn == lastPlaying
 
     fun isPlaying(): Boolean = currentState is GameState.Playing
+
+    fun isDraw(): Boolean = board.isFull()
 }

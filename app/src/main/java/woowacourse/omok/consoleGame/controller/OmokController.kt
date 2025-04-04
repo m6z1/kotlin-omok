@@ -26,7 +26,7 @@ class OmokController(
             }
             omokView.showBoard(omokGame.board)
         }
-        omokView.showWinner(omokGame.lastPlaying.stone)
+        checkWinner()
     }
 
     private fun getPosition(
@@ -39,4 +39,12 @@ class OmokController(
             boundary = board.sideLength.value,
             lastPosition = lastPosition,
         )
+
+    private fun checkWinner() {
+        if (omokGame.isDraw()) {
+            omokView.showDraw()
+            return
+        }
+        omokView.showWinner(omokGame.lastPlaying.stone)
+    }
 }
